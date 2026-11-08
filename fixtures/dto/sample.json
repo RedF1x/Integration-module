@@ -1,0 +1,150 @@
+{
+  "projects": [
+    {
+      "key": "DEMO",
+      "name": "Demo project"
+    }
+  ],
+  "issues": [
+    {
+      "jira_id": "1001",
+      "key": "DEMO-1",
+      "project_key": "DEMO",
+      "summary": "Настроить окружение",
+      "issue_type": "Task",
+      "priority": "Medium",
+      "rank": "0|i00001:",
+      "updated_at": "2026-11-04T10:00:00.000+0000",
+      "status": {
+        "name": "To Do",
+        "category": "todo"
+      },
+      "assignee": {
+        "account_id": "acc-1",
+        "display_name": "Тест Практикант 1",
+        "email": null,
+        "avatar_url": null
+      },
+      "sprint": {
+        "jira_id": "10",
+        "name": "Sprint 1",
+        "state": "active",
+        "start_date": "2026-11-02T09:00:00+00:00",
+        "end_date": "2026-11-16T09:00:00+00:00"
+      },
+      "labels": [
+        "intern-visible"
+      ],
+      "description_html": "<p>Поднять docker compose</p>",
+      "custom_fields": {},
+      "comments": [
+        {
+          "jira_id": "5001",
+          "author": {
+            "account_id": "acc-2",
+            "display_name": "Тест Сотрудник",
+            "email": "staff@example.com",
+            "avatar_url": null
+          },
+          "body_html": "<p>Начни с README</p>",
+          "created_at": "2026-11-04T11:00:00.000+0000"
+        }
+      ],
+      "links": [
+        {
+          "link_type": "Blocks",
+          "direction": "outward",
+          "target_key": "DEMO-2"
+        }
+      ]
+    },
+    {
+      "jira_id": "1002",
+      "key": "DEMO-2",
+      "project_key": "DEMO",
+      "summary": "Написать тесты",
+      "issue_type": "Story",
+      "priority": "High",
+      "rank": "0|i00002:",
+      "updated_at": "2026-11-05T12:00:00.000+0000",
+      "status": {
+        "name": "In Progress",
+        "category": "in_progress"
+      },
+      "assignee": {
+        "account_id": "acc-1",
+        "display_name": "Тест Практикант 1",
+        "email": null,
+        "avatar_url": null
+      },
+      "sprint": {
+        "jira_id": "10",
+        "name": "Sprint 1",
+        "state": "active",
+        "start_date": "2026-11-02T09:00:00+00:00",
+        "end_date": "2026-11-16T09:00:00+00:00"
+      },
+      "labels": [
+        "intern-visible"
+      ],
+      "description_html": null,
+      "custom_fields": {
+        "customfield_10100": "Описание для практиканта"
+      },
+      "comments": [],
+      "links": [
+        {
+          "link_type": "Blocks",
+          "direction": "inward",
+          "target_key": "DEMO-1"
+        }
+      ]
+    },
+    {
+      "jira_id": "1003",
+      "key": "DEMO-3",
+      "project_key": "DEMO",
+      "summary": "Задача из бэклога",
+      "issue_type": "Bug",
+      "priority": "Low",
+      "rank": "0|i00003:",
+      "updated_at": "2026-10-30T08:00:00.000+0000",
+      "status": {
+        "name": "Done",
+        "category": "done"
+      },
+      "assignee": null,
+      "sprint": null,
+      "labels": [
+        "intern-visible"
+      ],
+      "description_html": null,
+      "custom_fields": {},
+      "comments": [],
+      "links": []
+    },
+    {
+      "jira_id": "1004",
+      "key": "DEMO-4",
+      "project_key": "DEMO",
+      "summary": "Проверка фильтра (вымышленные данные)",
+      "issue_type": "Task",
+      "priority": "Medium",
+      "rank": "0|i00004:",
+      "updated_at": "2026-11-06T09:00:00.000+0000",
+      "status": {
+        "name": "To Do",
+        "category": "todo"
+      },
+      "assignee": null,
+      "sprint": null,
+      "labels": [
+        "intern-visible"
+      ],
+      "description_html": "<p>Паспорт: 0000 000000 (вымышлено, для проверки фильтра)</p>",
+      "custom_fields": {},
+      "comments": [],
+      "links": []
+    }
+  ]
+}

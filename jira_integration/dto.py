@@ -1,0 +1,189 @@
+"""IssueDTO: единый формат задачи внутри модуля (контракт, раздел 0 ТЗ).
+
+Владелец файла: Бэкенд А. Изменения только через PR с меткой `contract`,
+одобряют оба бэкендера.
+
+DTO не зависит от Django и БД. Даты хранятся строками ISO 8601
+(как в контракте API); валидность проверяется при создании.
+"""
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
+from typing import Any, Optional
+
+STATUS_CATEGORIES = ("todo", "in_progress", "done")
+LINK_DIRECTIONS = ("inward", "outward")  # как в Jira; сверить с БД-схемой (CHECK по direction)
+
+
+class DTOError(ValueError):
+    """Ошибка структуры или значения при создании DTO."""
+
+
+def parse_iso(value: str, field_name: str = "date") -> datetime:
+    """Разбирает ISO 8601. Понимает 'Z' и смещения вида +0300 и +03:00."""
+    if not isinstance(value, str) or not value:
+        raise DTOError(f"{field_name}: ожидалась строка ISO 8601")
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise DTOError(f"{field_name}: неверный формат даты {value!r}") from exc
+
+
+def _require(data: dict, key: str, where: str) -> Any:
+    if not isinstance(data, dict):
+        raise DTOError(f"{where}: ожидался словарь")
+    value = data.get(key)
+    if value is None or value == "":
+        raise DTOError(f"{where}: обязательное поле {key!r} отсутствует")
+    return value
+
+
+@dataclass
+class StatusDTO:
+    name: str
+    category: str  # todo | in_progress | done
+
+    def __post_init__(self) -> None:
+        if self.category not in STATUS_CATEGORIES:
+            raise DTOError(f"status.category: {self.category!r} не из {STATUS_CATEGORIES}")
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "StatusDTO":
+        return cls(name=_require(data, "name", "status"),
+                   category=_require(data, "category", "status"))
+
+
+@dataclass
+class UserDTO:
+    account_id: str
+    display_name: str
+    email: Optional[str] = None  # в Jira может быть скрыт
+    avatar_url: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "UserDTO":
+        return cls(
+            account_id=_require(data, "account_id", "user"),
+            display_name=_require(data, "display_name", "user"),
+            email=data.get("email") or None,
+            avatar_url=data.get("avatar_url") or None,
+        )
+
+
+@dataclass
+class SprintDTO:
+    jira_id: str
+    name: str
+    state: str  # active | future | closed (как в Jira)
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "SprintDTO":
+        return cls(
+            jira_id=str(_require(data, "jira_id", "sprint")),
+            name=_require(data, "name", "sprint"),
+            state=_require(data, "state", "sprint"),
+            start_date=data.get("start_date") or None,
+            end_date=data.get("end_date") or None,
+        )
+
+
+@dataclass
+class CommentDTO:
+    jira_id: str  # добавлено на утверждении спринта 1: нужен для upsert комментариев
+    author: UserDTO
+    body_html: str  # только очищенный HTML
+    created_at: str
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "CommentDTO":
+        created = _require(data, "created_at", "comment")
+        parse_iso(created, "comment.created_at")
+        return cls(
+            jira_id=str(_require(data, "jira_id", "comment")),
+            author=UserDTO.from_dict(_require(data, "author", "comment")),
+            body_html=data.get("body_html") or "",
+            created_at=created,
+        )
+
+
+@dataclass
+class LinkDTO:
+    link_type: str
+    direction: str  # inward | outward
+    target_key: str
+
+    def __post_init__(self) -> None:
+        if self.direction not in LINK_DIRECTIONS:
+            raise DTOError(f"link.direction: {self.direction!r} не из {LINK_DIRECTIONS}")
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "LinkDTO":
+        return cls(
+            link_type=_require(data, "link_type", "link"),
+            direction=_require(data, "direction", "link"),
+            target_key=_require(data, "target_key", "link"),
+        )
+
+
+@dataclass
+class IssueDTO:
+    jira_id: str
+    key: str
+    project_key: str
+    summary: str
+    issue_type: str
+    status: StatusDTO
+    updated_at: str  # ISO 8601
+    priority: Optional[str] = None
+    rank: Optional[str] = None
+    assignee: Optional[UserDTO] = None
+    sprint: Optional[SprintDTO] = None
+    labels: list[str] = field(default_factory=list)
+    description_html: Optional[str] = None  # очищенный HTML или None
+    custom_fields: dict[str, Any] = field(default_factory=dict)  # только белый список
+    comments: list[CommentDTO] = field(default_factory=list)
+    links: list[LinkDTO] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        parse_iso(self.updated_at, "updated_at")
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "IssueDTO":
+        where = "issue"
+        assignee = data.get("assignee")
+        sprint = data.get("sprint")
+        return cls(
+            jira_id=str(_require(data, "jira_id", where)),
+            key=_require(data, "key", where),
+            project_key=_require(data, "project_key", where),
+            summary=_require(data, "summary", where),
+            issue_type=_require(data, "issue_type", where),
+            status=StatusDTO.from_dict(_require(data, "status", where)),
+            updated_at=_require(data, "updated_at", where),
+            priority=data.get("priority"),
+            rank=data.get("rank"),
+            assignee=UserDTO.from_dict(assignee) if assignee else None,
+            sprint=SprintDTO.from_dict(sprint) if sprint else None,
+            labels=[str(x) for x in data.get("labels") or []],
+            description_html=data.get("description_html"),
+            custom_fields=dict(data.get("custom_fields") or {}),
+            comments=[CommentDTO.from_dict(c) for c in data.get("comments") or []],
+            links=[LinkDTO.from_dict(x) for x in data.get("links") or []],
+        )
+
+
+@dataclass
+class ProjectDTO:
+    """Служебный DTO для IssueSource.projects(); в контракт API не входит."""
+    key: str
+    name: str
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "ProjectDTO":
+        return cls(key=_require(data, "key", "project"), name=_require(data, "name", "project"))
