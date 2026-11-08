@@ -1,6 +1,7 @@
 {
   "projects": [
     {
+      "jira_id": "10100",
       "key": "DEMO",
       "name": "Demo project"
     }
@@ -16,6 +17,7 @@
       "rank": "0|i00001:",
       "updated_at": "2026-11-04T10:00:00.000+0000",
       "status": {
+        "jira_id": "10000",
         "name": "To Do",
         "category": "todo"
       },
@@ -68,6 +70,7 @@
       "rank": "0|i00002:",
       "updated_at": "2026-11-05T12:00:00.000+0000",
       "status": {
+        "jira_id": "10001",
         "name": "In Progress",
         "category": "in_progress"
       },
@@ -110,6 +113,7 @@
       "rank": "0|i00003:",
       "updated_at": "2026-10-30T08:00:00.000+0000",
       "status": {
+        "jira_id": "10002",
         "name": "Done",
         "category": "done"
       },
@@ -133,6 +137,7 @@
       "rank": "0|i00004:",
       "updated_at": "2026-11-06T09:00:00.000+0000",
       "status": {
+        "jira_id": "10000",
         "name": "To Do",
         "category": "todo"
       },

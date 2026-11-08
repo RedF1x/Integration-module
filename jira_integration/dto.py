@@ -41,6 +41,7 @@ def _require(data: dict, key: str, where: str) -> Any:
 
 @dataclass
 class StatusDTO:
+    jira_id: str  # id статуса в Jira (status.id); ключ для upsert в jira_status
     name: str
     category: str  # todo | in_progress | done
 
@@ -50,7 +51,8 @@ class StatusDTO:
 
     @classmethod
     def from_dict(cls, data: dict) -> "StatusDTO":
-        return cls(name=_require(data, "name", "status"),
+        return cls(jira_id=str(_require(data, "jira_id", "status")),
+                   name=_require(data, "name", "status"),
                    category=_require(data, "category", "status"))
 
 
@@ -181,9 +183,12 @@ class IssueDTO:
 @dataclass
 class ProjectDTO:
     """Служебный DTO для IssueSource.projects(); в контракт API не входит."""
+    jira_id: str  # id проекта в Jira (project.id); ключ для upsert в jira_project
     key: str
     name: str
 
     @classmethod
     def from_dict(cls, data: dict) -> "ProjectDTO":
-        return cls(key=_require(data, "key", "project"), name=_require(data, "name", "project"))
+        return cls(jira_id=str(_require(data, "jira_id", "project")),
+                   key=_require(data, "key", "project"),
+                   name=_require(data, "name", "project"))
