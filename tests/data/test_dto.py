@@ -82,3 +82,27 @@ def test_same_status_name_has_same_jira_id_in_sample():
     for raw in data["issues"]:
         st = StatusDTO.from_dict(raw["status"])
         assert seen.setdefault(st.name, st.jira_id) == st.jira_id
+
+
+@pytest.mark.parametrize("labels", ["intern-visible", {"intern-visible": False}, ["intern-visible", 1]])
+def test_labels_must_be_list_of_strings(labels):
+    data = minimal()
+    data["labels"] = labels
+    with pytest.raises(DTOError, match="labels"):
+        IssueDTO.from_dict(data)
+
+
+@pytest.mark.parametrize("field_name", ["start_date", "end_date"])
+def test_sprint_rejects_invalid_dates(field_name):
+    data = minimal()
+    data["sprint"] = {"jira_id": "10", "name": "Sprint 1", "state": "active", field_name: "вчера"}
+    with pytest.raises(DTOError, match=f"sprint.{field_name}"):
+        IssueDTO.from_dict(data)
+
+
+def test_sprint_accepts_missing_dates():
+    data = minimal()
+    data["sprint"] = {"jira_id": "10", "name": "Sprint 1", "state": "active",
+                      "start_date": None, "end_date": None}
+    sprint = IssueDTO.from_dict(data).sprint
+    assert sprint.start_date is None and sprint.end_date is None

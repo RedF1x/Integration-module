@@ -81,6 +81,12 @@ class SprintDTO:
     start_date: Optional[str] = None
     end_date: Optional[str] = None
 
+    def __post_init__(self) -> None:
+        if self.start_date is not None:
+            parse_iso(self.start_date, "sprint.start_date")
+        if self.end_date is not None:
+            parse_iso(self.end_date, "sprint.end_date")
+
     @classmethod
     def from_dict(cls, data: dict) -> "SprintDTO":
         return cls(
@@ -151,6 +157,10 @@ class IssueDTO:
 
     def __post_init__(self) -> None:
         parse_iso(self.updated_at, "updated_at")
+        if not isinstance(self.labels, list) or not all(
+            isinstance(label, str) for label in self.labels
+        ):
+            raise DTOError("labels: ожидался список строк")
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -172,7 +182,7 @@ class IssueDTO:
             rank=data.get("rank"),
             assignee=UserDTO.from_dict(assignee) if assignee else None,
             sprint=SprintDTO.from_dict(sprint) if sprint else None,
-            labels=[str(x) for x in data.get("labels") or []],
+            labels=data.get("labels") if data.get("labels") is not None else [],
             description_html=data.get("description_html"),
             custom_fields=dict(data.get("custom_fields") or {}),
             comments=[CommentDTO.from_dict(c) for c in data.get("comments") or []],
