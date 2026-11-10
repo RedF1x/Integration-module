@@ -28,7 +28,7 @@ def test_missing_dir(tmp_path):
 
 
 def test_broken_file_does_not_leak_content(tmp_path):
-    (tmp_path / "bad.json").write_text(json.dumps({"issues": [{"key": "SECRET-1"}]}), encoding="utf-8")
+    (tmp_path / "bad.json").write_text(json.dumps({"projects": [], "issues": [{"key": "SECRET-1"}]}), encoding="utf-8")
     with pytest.raises(SourceError) as info:
         FileSource(tmp_path)
     assert "SECRET" not in str(info.value)
@@ -41,3 +41,38 @@ def test_factory_unknown_and_rest(monkeypatch):
     monkeypatch.setenv("JIRA_SOURCE", "rest")
     with pytest.raises(SourceError):
         get_source()
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"id": "1", "key": "DEMO-1", "fields": {}},
+        [],
+        None,
+        {},
+        {"projects": []},
+        {"issues": []},
+        {"projects": {}, "issues": []},
+        {"projects": [], "issues": None},
+        {"projects": [None], "issues": []},
+        {"projects": [], "issues": ["DEMO-1"]},
+    ],
+)
+def test_invalid_file_structure_raises_source_error(tmp_path, payload):
+    (tmp_path / "invalid.json").write_text(
+        json.dumps(payload), encoding="utf-8"
+    )
+
+    with pytest.raises(SourceError):
+        FileSource(tmp_path)
+
+
+def test_valid_empty_file_is_allowed(tmp_path):
+    (tmp_path / "empty.json").write_text(
+        json.dumps({"projects": [], "issues": []}), encoding="utf-8"
+    )
+
+    source = FileSource(tmp_path)
+
+    assert source.projects() == []
+    assert list(source.issues()) == []

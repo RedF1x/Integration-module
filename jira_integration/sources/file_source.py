@@ -31,8 +31,15 @@ class FileSource(IssueSource):
         for path in files:
             try:
                 data = json.loads(path.read_text(encoding="utf-8"))
-                self._projects += [ProjectDTO.from_dict(p) for p in data.get("projects", [])]
-                self._issues += [IssueDTO.from_dict(i) for i in data.get("issues", [])]
+                if not isinstance(data, dict):
+                    raise ValueError("Expected an object with projects and issues")
+                for name in ("projects", "issues"):
+                    if not isinstance(data.get(name), list):
+                        raise ValueError(f"{name} must be a list")
+                    if any(not isinstance(item, dict) for item in data[name]):
+                        raise ValueError(f"{name} must contain objects")
+                self._projects += [ProjectDTO.from_dict(p) for p in data["projects"]]
+                self._issues += [IssueDTO.from_dict(i) for i in data["issues"]]
             except (ValueError, KeyError) as exc:
                 # сообщение без содержимого задач
                 raise SourceError(f"Файл {path.name} не разобран: {type(exc).__name__}") from exc
