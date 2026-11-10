@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Переход в Jira</title>
+</head>
+<body>
+    <h1>Работа с задачами в Jira</h1>
+    {% if jira_url %}
+        <a href="{{ jira_url }}">Открыть Jira</a>
+    {% else %}
+        <p>Адрес Jira пока не настроен.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'jira_integration:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+</body>
+</html>

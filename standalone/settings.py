@@ -24,6 +24,11 @@ environ.Env.read_env(BASE_DIR / ".env")
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+JIRA_IDENTITY = env("JIRA_IDENTITY", default="local")
+JIRA_BASE_URL = env("JIRA_BASE_URL", default="")
+LOGIN_URL = "jira_integration:login"
+LOGIN_REDIRECT_URL = "jira_integration:index"
+LOGOUT_REDIRECT_URL = "jira_integration:login"
 
 
 # Application definition
