@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Модуль интеграции Jira</title>
+</head>
+<body>
+    <p>Модуль интеграции Jira запущен.</p>
+    <form method="post" action="{% url 'jira_integration:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+</body>
+</html>
