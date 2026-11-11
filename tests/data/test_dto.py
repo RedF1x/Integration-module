@@ -106,3 +106,95 @@ def test_sprint_accepts_missing_dates():
                       "start_date": None, "end_date": None}
     sprint = IssueDTO.from_dict(data).sprint
     assert sprint.start_date is None and sprint.end_date is None
+
+
+@pytest.mark.parametrize("value", ["2026-11-11", "2026-11-11T12:00:00"])
+@pytest.mark.parametrize("field_name", [
+    "updated_at", "comment.created_at", "sprint.start_date", "sprint.end_date",
+])
+def test_dates_require_timezone(field_name, value):
+    data = minimal()
+    if field_name == "updated_at":
+        data["updated_at"] = value
+    elif field_name == "comment.created_at":
+        data["comments"] = [{
+            "jira_id": "1",
+            "author": {"account_id": "x", "display_name": "N"},
+            "created_at": value,
+        }]
+    else:
+        data["sprint"] = {
+            "jira_id": "10", "name": "Sprint", "state": "active",
+            field_name.split(".")[1]: value,
+        }
+    with pytest.raises(DTOError, match="часовым поясом"):
+        IssueDTO.from_dict(data)
+
+
+@pytest.mark.parametrize("value", [[], None, "issue"])
+def test_issue_input_must_be_an_object(value):
+    with pytest.raises(DTOError, match="issue"):
+        IssueDTO.from_dict(value)
+
+
+@pytest.mark.parametrize(("field_name", "value"), [
+    ("comments", 123), ("comments", 0), ("comments", {}), ("comments", "text"),
+    ("links", 123), ("links", False), ("links", {}), ("links", "text"),
+    ("custom_fields", 123), ("custom_fields", False),
+    ("custom_fields", []), ("custom_fields", "text"),
+])
+def test_nested_collections_reject_wrong_types(field_name, value):
+    data = minimal()
+    data[field_name] = value
+    with pytest.raises(DTOError, match=field_name):
+        IssueDTO.from_dict(data)
+
+
+def test_nullable_collections_keep_empty_defaults():
+    data = minimal()
+    data.update(comments=None, links=None, custom_fields=None)
+    issue = IssueDTO.from_dict(data)
+    assert issue.comments == [] and issue.links == [] and issue.custom_fields == {}
+
+
+@pytest.mark.parametrize("field_name", ["comments", "links"])
+def test_nested_collection_items_must_be_objects(field_name):
+    data = minimal()
+    data[field_name] = [123]
+    with pytest.raises(DTOError):
+        IssueDTO.from_dict(data)
+
+
+@pytest.mark.parametrize("field_name", ["assignee", "sprint"])
+@pytest.mark.parametrize("value", [False, {}])
+def test_optional_objects_reject_invalid_values(field_name, value):
+    data = minimal()
+    data[field_name] = value
+    with pytest.raises(DTOError):
+        IssueDTO.from_dict(data)
+
+
+@pytest.mark.parametrize("state", ["paused", "", False])
+def test_sprint_rejects_unknown_state(state):
+    data = minimal()
+    data["sprint"] = {"jira_id": "10", "name": "Sprint", "state": state}
+    with pytest.raises(DTOError):
+        IssueDTO.from_dict(data)
+
+
+@pytest.mark.parametrize("state", ["future", "active", "closed"])
+def test_sprint_accepts_known_state(state):
+    data = minimal()
+    data["sprint"] = {"jira_id": "10", "name": "Sprint", "state": state}
+    assert IssueDTO.from_dict(data).sprint.state == state
+
+
+@pytest.mark.parametrize("field_name", ["start_date", "end_date"])
+@pytest.mark.parametrize("value", [False, 0, ""])
+def test_sprint_dates_reject_false_values(field_name, value):
+    data = minimal()
+    data["sprint"] = {
+        "jira_id": "10", "name": "Sprint", "state": "active", field_name: value,
+    }
+    with pytest.raises(DTOError, match=f"sprint.{field_name}"):
+        IssueDTO.from_dict(data)

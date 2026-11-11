@@ -76,3 +76,37 @@ def test_valid_empty_file_is_allowed(tmp_path):
 
     assert source.projects() == []
     assert list(source.issues()) == []
+
+
+@pytest.mark.parametrize(("field_name", "value"), [
+    ("comments", 123), ("links", 123), ("custom_fields", 123),
+    ("comments", [123]), ("links", [123]),
+    ("updated_at", "2026-11-11T12:00:00"),
+])
+def test_invalid_nested_values_raise_source_error(tmp_path, field_name, value):
+    sample = get_source()
+    issue = sample.issue_detail("DEMO-1").to_dict()
+    issue[field_name] = value
+    (tmp_path / "invalid.json").write_text(
+        json.dumps({"projects": [], "issues": [issue]}), encoding="utf-8"
+    )
+    with pytest.raises(SourceError):
+        FileSource(tmp_path)
+
+
+@pytest.mark.parametrize("timestamp", [
+    "2026-11-11T12:00:00Z",
+    "2026-11-11T15:00:00+03:00",
+    "2026-11-11T15:00:00+0300",
+])
+def test_since_filter_handles_offsets_and_includes_boundary(tmp_path, timestamp):
+    issue = get_source().issue_detail("DEMO-1").to_dict()
+    issue["updated_at"] = timestamp
+    (tmp_path / "sample.json").write_text(
+        json.dumps({"projects": [], "issues": [issue]}), encoding="utf-8"
+    )
+    source = FileSource(tmp_path)
+    boundary = datetime(2026, 11, 11, 12, tzinfo=timezone.utc)
+    assert [item.key for item in source.issues(boundary)] == ["DEMO-1"]
+    after = datetime(2026, 11, 11, 12, 0, 1, tzinfo=timezone.utc)
+    assert list(source.issues(after)) == []
