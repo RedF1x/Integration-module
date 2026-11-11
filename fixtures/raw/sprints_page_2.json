@@ -1,0 +1,24 @@
+{
+  "maxResults": 2,
+  "startAt": 2,
+  "total": 4,
+  "isLast": true,
+  "values": [
+    {
+      "id": 1,
+      "self": "https://example.atlassian.net/rest/agile/1.0/sprint/1",
+      "state": "future",
+      "name": "SCRUM Спринт 1",
+      "createdDate": "2026-11-07T19:34:45.637Z",
+      "originBoardId": 1
+    },
+    {
+      "id": 3,
+      "self": "https://example.atlassian.net/rest/agile/1.0/sprint/3",
+      "state": "future",
+      "name": "[RECON] Будущий спринт",
+      "createdDate": "2026-11-11T00:46:56.447Z",
+      "originBoardId": 1
+    }
+  ]
+}

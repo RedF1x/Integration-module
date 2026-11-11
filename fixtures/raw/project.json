@@ -1,0 +1,75 @@
+{
+  "expand": "description,lead,issueTypes,url,projectKeys,permissions,insight",
+  "self": "https://example.atlassian.net/rest/api/3/project/10000",
+  "id": "10000",
+  "key": "SCRUM",
+  "description": "Your first project",
+  "lead": {
+    "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+    "accountId": "test-account-1",
+    "avatarUrls": {
+      "48x48": "https://example.test/avatar/48x48.png",
+      "24x24": "https://example.test/avatar/24x24.png",
+      "16x16": "https://example.test/avatar/16x16.png",
+      "32x32": "https://example.test/avatar/32x32.png"
+    },
+    "displayName": "Тестовый пользователь 1",
+    "active": true
+  },
+  "components": [],
+  "issueTypes": [
+    {
+      "self": "https://example.atlassian.net/rest/api/3/issuetype/10001",
+      "id": "10001",
+      "description": "Эпики позволяют отслеживать похожие истории, задания и связанные с ними ошибки.",
+      "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10307?size=medium",
+      "name": "Эпик",
+      "subtask": false,
+      "avatarId": 10307,
+      "hierarchyLevel": 1
+    },
+    {
+      "self": "https://example.atlassian.net/rest/api/3/issuetype/10002",
+      "id": "10002",
+      "description": "Подзадача позволяет отслеживать небольшие части работы, которые входят в более крупные задания.",
+      "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10316?size=medium",
+      "name": "Подзадача",
+      "subtask": true,
+      "avatarId": 10316,
+      "hierarchyLevel": -1
+    },
+    {
+      "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+      "id": "10003",
+      "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+      "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+      "name": "Задание",
+      "subtask": false,
+      "avatarId": 10318,
+      "hierarchyLevel": 0
+    }
+  ],
+  "assigneeType": "UNASSIGNED",
+  "versions": [],
+  "name": "Учебный проект Jira",
+  "roles": {
+    "atlassian-addons-project-access": "https://example.atlassian.net/rest/api/3/project/10000/role/10008",
+    "Administrator": "https://example.atlassian.net/rest/api/3/project/10000/role/10004",
+    "jira-guest-member": "https://example.atlassian.net/rest/api/3/project/10000/role/10007",
+    "Viewer": "https://example.atlassian.net/rest/api/3/project/10000/role/10006",
+    "Member": "https://example.atlassian.net/rest/api/3/project/10000/role/10005"
+  },
+  "avatarUrls": {
+    "48x48": "https://example.test/avatar/48x48.png",
+    "24x24": "https://example.test/avatar/24x24.png",
+    "16x16": "https://example.test/avatar/16x16.png",
+    "32x32": "https://example.test/avatar/32x32.png"
+  },
+  "projectTypeKey": "software",
+  "simplified": true,
+  "style": "next-gen",
+  "isPrivate": false,
+  "properties": {},
+  "entityId": "07143fb3-8e7d-4936-a9f2-e0d6979ed5e3",
+  "uuid": "07143fb3-8e7d-4936-a9f2-e0d6979ed5e3"
+}

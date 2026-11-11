@@ -1,0 +1,224 @@
+{
+  "issues": [
+    {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "10014",
+      "self": "https://example.atlassian.net/rest/api/3/issue/10014",
+      "key": "SCRUM-15",
+      "fields": {
+        "summary": "[RECON] Тест фильтрации вымышленных персональных сведений",
+        "issuetype": {
+          "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+          "id": "10003",
+          "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+          "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+          "name": "Задание",
+          "subtask": false,
+          "avatarId": 10318,
+          "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+          "hierarchyLevel": 0
+        },
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ВЫМЫШЛЕННЫЙ ПРИМЕР. Паспорт: серия 0000, номер 000000. Эти сведения должны быть исключены будущей политикой."
+                }
+              ]
+            }
+          ]
+        },
+        "project": {
+          "self": "https://example.atlassian.net/rest/api/3/project/10000",
+          "id": "10000",
+          "key": "SCRUM",
+          "name": "Учебный проект Jira",
+          "projectTypeKey": "software",
+          "simplified": true,
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          }
+        },
+        "customfield_10020": [
+          {
+            "id": 2,
+            "name": "SCRUM Sprint 0",
+            "state": "active",
+            "boardId": 1,
+            "startDate": "2026-11-07T19:34:48.917Z",
+            "endDate": "2026-11-21T19:34:48.917Z"
+          }
+        ],
+        "priority": {
+          "self": "https://example.atlassian.net/rest/api/3/priority/3",
+          "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+          "name": "Medium",
+          "id": "3"
+        },
+        "customfield_10046": null,
+        "labels": [
+          "intern-visible",
+          "recon-20261111"
+        ],
+        "customfield_10019": "0|i00030:",
+        "comment": {
+          "comments": [],
+          "self": "https://example.atlassian.net/rest/api/3/issue/10014/comment",
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        },
+        "issuelinks": [],
+        "assignee": {
+          "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+          "accountId": "test-account-1",
+          "emailAddress": "user1@example.test",
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          },
+          "displayName": "Тестовый пользователь 1",
+          "active": true,
+          "timeZone": "Asia/Yekaterinburg",
+          "accountType": "atlassian"
+        },
+        "updated": "2026-11-11T05:47:00.193+0500",
+        "status": {
+          "self": "https://example.atlassian.net/rest/api/3/status/10000",
+          "description": "",
+          "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+          "name": "К выполнению",
+          "id": "10000",
+          "statusCategory": {
+            "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "К выполнению"
+          }
+        }
+      }
+    },
+    {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "10015",
+      "self": "https://example.atlassian.net/rest/api/3/issue/10015",
+      "key": "SCRUM-16",
+      "fields": {
+        "summary": "[RECON] Смена владельца и отзыв разрешающей метки",
+        "issuetype": {
+          "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+          "id": "10003",
+          "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+          "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+          "name": "Задание",
+          "subtask": false,
+          "avatarId": 10318,
+          "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+          "hierarchyLevel": 0
+        },
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Только вымышленные тестовые данные. Сценарий: changes"
+                }
+              ]
+            }
+          ]
+        },
+        "project": {
+          "self": "https://example.atlassian.net/rest/api/3/project/10000",
+          "id": "10000",
+          "key": "SCRUM",
+          "name": "Учебный проект Jira",
+          "projectTypeKey": "software",
+          "simplified": true,
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          }
+        },
+        "customfield_10020": [
+          {
+            "id": 2,
+            "name": "SCRUM Sprint 0",
+            "state": "active",
+            "boardId": 1,
+            "startDate": "2026-11-07T19:34:48.917Z",
+            "endDate": "2026-11-21T19:34:48.917Z"
+          }
+        ],
+        "priority": {
+          "self": "https://example.atlassian.net/rest/api/3/priority/3",
+          "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+          "name": "Medium",
+          "id": "3"
+        },
+        "customfield_10046": null,
+        "labels": [
+          "intern-visible",
+          "recon-20261111"
+        ],
+        "customfield_10019": "0|i0003b:",
+        "comment": {
+          "comments": [],
+          "self": "https://example.atlassian.net/rest/api/3/issue/10015/comment",
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        },
+        "issuelinks": [],
+        "assignee": {
+          "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+          "accountId": "test-account-1",
+          "emailAddress": "user1@example.test",
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          },
+          "displayName": "Тестовый пользователь 1",
+          "active": true,
+          "timeZone": "Asia/Yekaterinburg",
+          "accountType": "atlassian"
+        },
+        "updated": "2026-11-11T05:47:00.372+0500",
+        "status": {
+          "self": "https://example.atlassian.net/rest/api/3/status/10000",
+          "description": "",
+          "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+          "name": "К выполнению",
+          "id": "10000",
+          "statusCategory": {
+            "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "К выполнению"
+          }
+        }
+      }
+    }
+  ],
+  "nextPageToken": "fixture-page-token-013",
+  "isLast": false
+}

@@ -1,0 +1,531 @@
+{
+  "issues": [
+    {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "10010",
+      "self": "https://example.atlassian.net/rest/api/3/issue/10010",
+      "key": "SCRUM-11",
+      "fields": {
+        "summary": "[RECON] Комментарии и их пагинация",
+        "issuetype": {
+          "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+          "id": "10003",
+          "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+          "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+          "name": "Задание",
+          "subtask": false,
+          "avatarId": 10318,
+          "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+          "hierarchyLevel": 0
+        },
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Только вымышленные тестовые данные. Сценарий: comments"
+                }
+              ]
+            }
+          ]
+        },
+        "project": {
+          "self": "https://example.atlassian.net/rest/api/3/project/10000",
+          "id": "10000",
+          "key": "SCRUM",
+          "name": "Учебный проект Jira",
+          "projectTypeKey": "software",
+          "simplified": true,
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          }
+        },
+        "customfield_10020": [
+          {
+            "id": 2,
+            "name": "SCRUM Sprint 0",
+            "state": "active",
+            "boardId": 1,
+            "startDate": "2026-11-07T19:34:48.917Z",
+            "endDate": "2026-11-21T19:34:48.917Z"
+          }
+        ],
+        "priority": {
+          "self": "https://example.atlassian.net/rest/api/3/priority/3",
+          "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+          "name": "Medium",
+          "id": "3"
+        },
+        "customfield_10046": null,
+        "labels": [
+          "intern-visible",
+          "recon-20261111"
+        ],
+        "customfield_10019": "0|i00022:",
+        "comment": {
+          "comments": [
+            {
+              "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment/10000",
+              "id": "10000",
+              "author": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "body": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Тестовый комментарий 1. Вымышленные данные."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "updateAuthor": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "created": "2026-11-11T05:47:02.824+0500",
+              "updated": "2026-11-11T05:47:02.824+0500",
+              "jsdPublic": true
+            },
+            {
+              "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment/10001",
+              "id": "10001",
+              "author": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "body": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Тестовый комментарий 2. Вымышленные данные."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "updateAuthor": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "created": "2026-11-11T05:47:03.488+0500",
+              "updated": "2026-11-11T05:47:03.488+0500",
+              "jsdPublic": true
+            },
+            {
+              "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment/10002",
+              "id": "10002",
+              "author": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "body": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Тестовый комментарий 3. Вымышленные данные."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "updateAuthor": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "created": "2026-11-11T05:47:04.227+0500",
+              "updated": "2026-11-11T05:47:04.227+0500",
+              "jsdPublic": true
+            },
+            {
+              "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment/10003",
+              "id": "10003",
+              "author": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "body": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Тестовый комментарий 4. Вымышленные данные."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "updateAuthor": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "created": "2026-11-11T05:47:04.863+0500",
+              "updated": "2026-11-11T05:47:04.863+0500",
+              "jsdPublic": true
+            },
+            {
+              "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment/10004",
+              "id": "10004",
+              "author": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "body": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Ограниченный тестовый комментарий для проверки visibility."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "updateAuthor": {
+                "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+                "accountId": "test-account-1",
+                "emailAddress": "user1@example.test",
+                "avatarUrls": {
+                  "48x48": "https://example.test/avatar/48x48.png",
+                  "24x24": "https://example.test/avatar/24x24.png",
+                  "16x16": "https://example.test/avatar/16x16.png",
+                  "32x32": "https://example.test/avatar/32x32.png"
+                },
+                "displayName": "Тестовый пользователь 1",
+                "active": true,
+                "timeZone": "Asia/Yekaterinburg",
+                "accountType": "atlassian"
+              },
+              "created": "2026-11-11T05:49:07.341+0500",
+              "updated": "2026-11-11T05:49:07.341+0500",
+              "visibility": {
+                "type": "role",
+                "value": "Administrator",
+                "identifier": "Administrator"
+              },
+              "jsdPublic": true
+            }
+          ],
+          "self": "https://example.atlassian.net/rest/api/3/issue/10010/comment",
+          "maxResults": 5,
+          "total": 5,
+          "startAt": 0
+        },
+        "issuelinks": [],
+        "assignee": {
+          "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+          "accountId": "test-account-1",
+          "emailAddress": "user1@example.test",
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          },
+          "displayName": "Тестовый пользователь 1",
+          "active": true,
+          "timeZone": "Asia/Yekaterinburg",
+          "accountType": "atlassian"
+        },
+        "updated": "2026-11-11T05:49:07.341+0500",
+        "status": {
+          "self": "https://example.atlassian.net/rest/api/3/status/10000",
+          "description": "",
+          "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+          "name": "К выполнению",
+          "id": "10000",
+          "statusCategory": {
+            "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "К выполнению"
+          }
+        }
+      }
+    },
+    {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "10011",
+      "self": "https://example.atlassian.net/rest/api/3/issue/10011",
+      "key": "SCRUM-12",
+      "fields": {
+        "summary": "[RECON] Цель связи без разрешающей метки",
+        "issuetype": {
+          "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+          "id": "10003",
+          "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+          "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+          "name": "Задание",
+          "subtask": false,
+          "avatarId": 10318,
+          "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+          "hierarchyLevel": 0
+        },
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Только вымышленные тестовые данные. Сценарий: link_target"
+                }
+              ]
+            }
+          ]
+        },
+        "project": {
+          "self": "https://example.atlassian.net/rest/api/3/project/10000",
+          "id": "10000",
+          "key": "SCRUM",
+          "name": "Учебный проект Jira",
+          "projectTypeKey": "software",
+          "simplified": true,
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          }
+        },
+        "customfield_10020": null,
+        "priority": {
+          "self": "https://example.atlassian.net/rest/api/3/priority/3",
+          "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+          "name": "Medium",
+          "id": "3"
+        },
+        "customfield_10046": null,
+        "labels": [
+          "recon-20261111"
+        ],
+        "customfield_10019": "0|i0002f:",
+        "comment": {
+          "comments": [],
+          "self": "https://example.atlassian.net/rest/api/3/issue/10011/comment",
+          "maxResults": 0,
+          "total": 0,
+          "startAt": 0
+        },
+        "issuelinks": [
+          {
+            "id": "10000",
+            "self": "https://example.atlassian.net/rest/api/3/issueLink/10000",
+            "type": {
+              "id": "10000",
+              "name": "Blocks",
+              "inward": "is blocked by",
+              "outward": "blocks",
+              "self": "https://example.atlassian.net/rest/api/3/issueLinkType/10000"
+            },
+            "inwardIssue": {
+              "id": "10004",
+              "key": "SCRUM-5",
+              "self": "https://example.atlassian.net/rest/api/3/issue/10004",
+              "fields": {
+                "summary": "[RECON] Разрешённая задача активного спринта",
+                "status": {
+                  "self": "https://example.atlassian.net/rest/api/3/status/10001",
+                  "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+                  "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+                  "name": "В работе",
+                  "id": "10001",
+                  "statusCategory": {
+                    "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "yellow",
+                    "name": "В работе"
+                  }
+                },
+                "priority": {
+                  "self": "https://example.atlassian.net/rest/api/3/priority/3",
+                  "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+                  "name": "Medium",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+                  "id": "10003",
+                  "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+                  "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+                  "name": "Задание",
+                  "subtask": false,
+                  "avatarId": 10318,
+                  "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+                  "hierarchyLevel": 0
+                }
+              }
+            }
+          }
+        ],
+        "assignee": {
+          "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+          "accountId": "test-account-1",
+          "emailAddress": "user1@example.test",
+          "avatarUrls": {
+            "48x48": "https://example.test/avatar/48x48.png",
+            "24x24": "https://example.test/avatar/24x24.png",
+            "16x16": "https://example.test/avatar/16x16.png",
+            "32x32": "https://example.test/avatar/32x32.png"
+          },
+          "displayName": "Тестовый пользователь 1",
+          "active": true,
+          "timeZone": "Asia/Yekaterinburg",
+          "accountType": "atlassian"
+        },
+        "updated": "2026-11-11T05:49:09.365+0500",
+        "status": {
+          "self": "https://example.atlassian.net/rest/api/3/status/10002",
+          "description": "",
+          "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+          "name": "Готово",
+          "id": "10002",
+          "statusCategory": {
+            "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+            "id": 3,
+            "key": "done",
+            "colorName": "green",
+            "name": "Готово"
+          }
+        }
+      }
+    }
+  ],
+  "nextPageToken": "fixture-page-token-011",
+  "isLast": false
+}

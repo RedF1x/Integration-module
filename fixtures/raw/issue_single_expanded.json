@@ -1,0 +1,186 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "10004",
+  "self": "https://example.atlassian.net/rest/api/3/issue/10004",
+  "key": "SCRUM-5",
+  "renderedFields": {
+    "summary": null,
+    "issuetype": null,
+    "description": "<p>Тестовая задача для разведки интеграции Jira. Только вымышленные данные. Сценарий: исполнитель, intern-visible, активный спринт.</p>",
+    "project": null,
+    "customfield_10020": null,
+    "priority": null,
+    "customfield_10046": "",
+    "labels": null,
+    "customfield_10019": null,
+    "comment": {
+      "comments": [],
+      "self": "https://example.atlassian.net/rest/api/3/issue/10004/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "issuelinks": null,
+    "assignee": null,
+    "updated": "Сегодня 5:49 AM",
+    "status": null
+  },
+  "fields": {
+    "summary": "[RECON] Разрешённая задача активного спринта",
+    "issuetype": {
+      "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+      "id": "10003",
+      "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+      "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+      "name": "Задание",
+      "subtask": false,
+      "avatarId": 10318,
+      "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+      "hierarchyLevel": 0
+    },
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Тестовая задача для разведки интеграции Jira. Только вымышленные данные. Сценарий: исполнитель, intern-visible, активный спринт."
+            }
+          ],
+          "attrs": {
+            "localId": "4196dc1fb05d"
+          }
+        }
+      ]
+    },
+    "project": {
+      "self": "https://example.atlassian.net/rest/api/3/project/10000",
+      "id": "10000",
+      "key": "SCRUM",
+      "name": "Учебный проект Jira",
+      "projectTypeKey": "software",
+      "simplified": true,
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      }
+    },
+    "customfield_10020": [
+      {
+        "id": 2,
+        "name": "SCRUM Sprint 0",
+        "state": "active",
+        "boardId": 1,
+        "startDate": "2026-11-07T19:34:48.917Z",
+        "endDate": "2026-11-21T19:34:48.917Z"
+      }
+    ],
+    "priority": {
+      "self": "https://example.atlassian.net/rest/api/3/priority/3",
+      "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+      "name": "Medium",
+      "id": "3"
+    },
+    "customfield_10046": null,
+    "labels": [
+      "intern-visible",
+      "intern:demo-a",
+      "recon-20261111"
+    ],
+    "customfield_10019": "0|i0000n:",
+    "comment": {
+      "comments": [],
+      "self": "https://example.atlassian.net/rest/api/3/issue/10004/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "issuelinks": [
+      {
+        "id": "10000",
+        "self": "https://example.atlassian.net/rest/api/3/issueLink/10000",
+        "type": {
+          "id": "10000",
+          "name": "Blocks",
+          "inward": "is blocked by",
+          "outward": "blocks",
+          "self": "https://example.atlassian.net/rest/api/3/issueLinkType/10000"
+        },
+        "outwardIssue": {
+          "id": "10011",
+          "key": "SCRUM-12",
+          "self": "https://example.atlassian.net/rest/api/3/issue/10011",
+          "fields": {
+            "summary": "[RECON] Цель связи без разрешающей метки",
+            "status": {
+              "self": "https://example.atlassian.net/rest/api/3/status/10002",
+              "description": "",
+              "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Готово",
+              "id": "10002",
+              "statusCategory": {
+                "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Готово"
+              }
+            },
+            "priority": {
+              "self": "https://example.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "issuetype": {
+              "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+              "id": "10003",
+              "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+              "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Задание",
+              "subtask": false,
+              "avatarId": 10318,
+              "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+              "hierarchyLevel": 0
+            }
+          }
+        }
+      }
+    ],
+    "assignee": {
+      "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+      "accountId": "test-account-1",
+      "emailAddress": "user1@example.test",
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      },
+      "displayName": "Тестовый пользователь 1",
+      "active": true,
+      "timeZone": "Asia/Yekaterinburg",
+      "accountType": "atlassian"
+    },
+    "updated": "2026-11-11T05:49:08.580+0500",
+    "status": {
+      "self": "https://example.atlassian.net/rest/api/3/status/10001",
+      "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+      "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+      "name": "В работе",
+      "id": "10001",
+      "statusCategory": {
+        "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+        "id": 4,
+        "key": "indeterminate",
+        "colorName": "yellow",
+        "name": "В работе"
+      }
+    }
+  }
+}

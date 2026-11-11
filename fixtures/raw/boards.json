@@ -1,0 +1,24 @@
+{
+  "maxResults": 2,
+  "startAt": 0,
+  "total": 1,
+  "isLast": true,
+  "values": [
+    {
+      "id": 1,
+      "self": "https://example.atlassian.net/rest/agile/1.0/board/1",
+      "name": "SCRUM board",
+      "type": "simple",
+      "location": {
+        "projectId": 10000,
+        "displayName": "Учебный проект Jira (SCRUM)",
+        "projectName": "Учебный проект Jira",
+        "projectKey": "SCRUM",
+        "projectTypeKey": "software",
+        "avatarURI": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=small",
+        "name": "Учебный проект Jira (SCRUM)"
+      },
+      "isPrivate": false
+    }
+  ]
+}

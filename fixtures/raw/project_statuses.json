@@ -1,0 +1,215 @@
+[
+  {
+    "self": "https://example.atlassian.net/rest/api/3/issuetype/10001",
+    "id": "10001",
+    "name": "Эпик",
+    "subtask": false,
+    "statuses": [
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10000",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "К выполнению",
+        "untranslatedName": "To Do",
+        "id": "10000",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+          "id": 2,
+          "key": "new",
+          "colorName": "blue-gray",
+          "name": "К выполнению"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10002",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "Готово",
+        "untranslatedName": "Done",
+        "id": "10002",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Готово"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10001",
+        "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "В работе",
+        "untranslatedName": "In Progress",
+        "id": "10001",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+          "id": 4,
+          "key": "indeterminate",
+          "colorName": "yellow",
+          "name": "В работе"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "self": "https://example.atlassian.net/rest/api/3/issuetype/10002",
+    "id": "10002",
+    "name": "Подзадача",
+    "subtask": true,
+    "statuses": [
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10000",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "К выполнению",
+        "untranslatedName": "To Do",
+        "id": "10000",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+          "id": 2,
+          "key": "new",
+          "colorName": "blue-gray",
+          "name": "К выполнению"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10002",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "Готово",
+        "untranslatedName": "Done",
+        "id": "10002",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Готово"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10001",
+        "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "В работе",
+        "untranslatedName": "In Progress",
+        "id": "10001",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+          "id": 4,
+          "key": "indeterminate",
+          "colorName": "yellow",
+          "name": "В работе"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+    "id": "10003",
+    "name": "Задание",
+    "subtask": false,
+    "statuses": [
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10000",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "К выполнению",
+        "untranslatedName": "To Do",
+        "id": "10000",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/2",
+          "id": 2,
+          "key": "new",
+          "colorName": "blue-gray",
+          "name": "К выполнению"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10002",
+        "description": "",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "Готово",
+        "untranslatedName": "Done",
+        "id": "10002",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Готово"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      },
+      {
+        "self": "https://example.atlassian.net/rest/api/3/status/10001",
+        "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+        "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+        "name": "В работе",
+        "untranslatedName": "In Progress",
+        "id": "10001",
+        "statusCategory": {
+          "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+          "id": 4,
+          "key": "indeterminate",
+          "colorName": "yellow",
+          "name": "В работе"
+        },
+        "scope": {
+          "type": "PROJECT",
+          "project": {
+            "id": "10000"
+          }
+        }
+      }
+    ]
+  }
+]
