@@ -13,6 +13,7 @@ from datetime import datetime
 from typing import Any, Optional
 
 STATUS_CATEGORIES = ("todo", "in_progress", "done")
+SPRINT_STATES = ("future", "active", "closed")
 LINK_DIRECTIONS = ("inward", "outward")  # как в Jira; сверить с БД-схемой (CHECK по direction)
 
 
@@ -21,13 +22,16 @@ class DTOError(ValueError):
 
 
 def parse_iso(value: str, field_name: str = "date") -> datetime:
-    """Разбирает ISO 8601. Понимает 'Z' и смещения вида +0300 и +03:00."""
+    """Разбирает дату и время ISO 8601 с обязательным часовым поясом."""
     if not isinstance(value, str) or not value:
         raise DTOError(f"{field_name}: ожидалась строка ISO 8601")
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError as exc:
         raise DTOError(f"{field_name}: неверный формат даты {value!r}") from exc
+    if parsed.utcoffset() is None:
+        raise DTOError(f"{field_name}: требуется время с часовым поясом")
+    return parsed
 
 
 def _require(data: dict, key: str, where: str) -> Any:
@@ -82,6 +86,8 @@ class SprintDTO:
     end_date: Optional[str] = None
 
     def __post_init__(self) -> None:
+        if self.state not in SPRINT_STATES:
+            raise DTOError(f"sprint.state: {self.state!r} не из {SPRINT_STATES}")
         if self.start_date is not None:
             parse_iso(self.start_date, "sprint.start_date")
         if self.end_date is not None:
@@ -93,8 +99,8 @@ class SprintDTO:
             jira_id=str(_require(data, "jira_id", "sprint")),
             name=_require(data, "name", "sprint"),
             state=_require(data, "state", "sprint"),
-            start_date=data.get("start_date") or None,
-            end_date=data.get("end_date") or None,
+            start_date=data.get("start_date"),
+            end_date=data.get("end_date"),
         )
 
 
@@ -168,10 +174,18 @@ class IssueDTO:
     @classmethod
     def from_dict(cls, data: dict) -> "IssueDTO":
         where = "issue"
+        jira_id = str(_require(data, "jira_id", where))
         assignee = data.get("assignee")
         sprint = data.get("sprint")
+        for name in ("comments", "links"):
+            value = data.get(name)
+            if value is not None and not isinstance(value, list):
+                raise DTOError(f"{name}: ожидался список объектов")
+        custom_fields = data.get("custom_fields")
+        if custom_fields is not None and not isinstance(custom_fields, dict):
+            raise DTOError("custom_fields: ожидался словарь")
         return cls(
-            jira_id=str(_require(data, "jira_id", where)),
+            jira_id=jira_id,
             key=_require(data, "key", where),
             project_key=_require(data, "project_key", where),
             summary=_require(data, "summary", where),
@@ -180,8 +194,8 @@ class IssueDTO:
             updated_at=_require(data, "updated_at", where),
             priority=data.get("priority"),
             rank=data.get("rank"),
-            assignee=UserDTO.from_dict(assignee) if assignee else None,
-            sprint=SprintDTO.from_dict(sprint) if sprint else None,
+            assignee=UserDTO.from_dict(assignee) if assignee is not None else None,
+            sprint=SprintDTO.from_dict(sprint) if sprint is not None else None,
             labels=data.get("labels") if data.get("labels") is not None else [],
             description_html=data.get("description_html"),
             custom_fields=dict(data.get("custom_fields") or {}),
