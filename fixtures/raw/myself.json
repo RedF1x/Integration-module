@@ -1,0 +1,25 @@
+{
+  "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+  "accountId": "test-account-1",
+  "accountType": "atlassian",
+  "emailAddress": "user1@example.test",
+  "avatarUrls": {
+    "48x48": "https://example.test/avatar/48x48.png",
+    "24x24": "https://example.test/avatar/24x24.png",
+    "16x16": "https://example.test/avatar/16x16.png",
+    "32x32": "https://example.test/avatar/32x32.png"
+  },
+  "displayName": "Тестовый пользователь 1",
+  "active": true,
+  "timeZone": "Asia/Yekaterinburg",
+  "locale": "ru_RU",
+  "groups": {
+    "size": 4,
+    "items": []
+  },
+  "applicationRoles": {
+    "size": 1,
+    "items": []
+  },
+  "expand": "groups,applicationRoles"
+}

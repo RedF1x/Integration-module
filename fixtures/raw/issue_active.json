@@ -1,0 +1,325 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "10004",
+  "self": "https://example.atlassian.net/rest/api/3/issue/10004",
+  "key": "SCRUM-5",
+  "renderedFields": {
+    "statuscategorychangedate": "Сегодня 5:49 AM",
+    "issuetype": null,
+    "timespent": null,
+    "project": null,
+    "fixVersions": null,
+    "aggregatetimespent": null,
+    "statusCategory": null,
+    "customfield_10035": null,
+    "resolution": null,
+    "customfield_10036": null,
+    "resolutiondate": null,
+    "workratio": null,
+    "issuerestriction": null,
+    "watches": null,
+    "lastViewed": "Сегодня 5:41 AM",
+    "created": "Сегодня 5:41 AM",
+    "customfield_10020": null,
+    "customfield_10021": null,
+    "priority": null,
+    "labels": null,
+    "customfield_10026": null,
+    "customfield_10016": null,
+    "customfield_10017": "",
+    "customfield_10019": null,
+    "timeestimate": null,
+    "aggregatetimeoriginalestimate": null,
+    "versions": null,
+    "issuelinks": null,
+    "assignee": null,
+    "updated": "Сегодня 5:49 AM",
+    "status": null,
+    "components": null,
+    "timeoriginalestimate": null,
+    "description": "<p>Тестовая задача для разведки интеграции Jira. Только вымышленные данные. Сценарий: исполнитель, intern-visible, активный спринт.</p>",
+    "timetracking": {},
+    "customfield_10015": null,
+    "security": null,
+    "attachment": [],
+    "aggregatetimeestimate": null,
+    "summary": null,
+    "creator": null,
+    "subtasks": null,
+    "reporter": null,
+    "aggregateprogress": null,
+    "customfield_10000": null,
+    "customfield_10001": null,
+    "customfield_10046": "",
+    "environment": "",
+    "duedate": null,
+    "progress": null,
+    "votes": null,
+    "comment": {
+      "comments": [],
+      "self": "https://example.atlassian.net/rest/api/3/issue/10004/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  },
+  "fields": {
+    "statuscategorychangedate": "2026-11-11T05:49:08.580+0500",
+    "issuetype": {
+      "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+      "id": "10003",
+      "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+      "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+      "name": "Задание",
+      "subtask": false,
+      "avatarId": 10318,
+      "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+      "hierarchyLevel": 0
+    },
+    "timespent": null,
+    "project": {
+      "self": "https://example.atlassian.net/rest/api/3/project/10000",
+      "id": "10000",
+      "key": "SCRUM",
+      "name": "Учебный проект Jira",
+      "projectTypeKey": "software",
+      "simplified": true,
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      }
+    },
+    "fixVersions": [],
+    "aggregatetimespent": null,
+    "statusCategory": {
+      "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+      "id": 4,
+      "key": "indeterminate",
+      "colorName": "yellow",
+      "name": "В работе"
+    },
+    "customfield_10035": null,
+    "resolution": null,
+    "customfield_10036": null,
+    "resolutiondate": null,
+    "workratio": -1,
+    "issuerestriction": {
+      "issuerestrictions": {},
+      "shouldDisplay": true
+    },
+    "watches": {
+      "self": "https://example.atlassian.net/rest/api/3/issue/SCRUM-5/watchers",
+      "watchCount": 1,
+      "isWatching": true
+    },
+    "lastViewed": "2026-11-11T05:41:51.150+0500",
+    "created": "2026-11-11T05:41:00.976+0500",
+    "customfield_10020": [
+      {
+        "id": 2,
+        "name": "SCRUM Sprint 0",
+        "state": "active",
+        "boardId": 1,
+        "startDate": "2026-11-07T19:34:48.917Z",
+        "endDate": "2026-11-21T19:34:48.917Z"
+      }
+    ],
+    "customfield_10021": null,
+    "priority": {
+      "self": "https://example.atlassian.net/rest/api/3/priority/3",
+      "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+      "name": "Medium",
+      "id": "3"
+    },
+    "labels": [
+      "intern-visible",
+      "intern:demo-a",
+      "recon-20261111"
+    ],
+    "customfield_10026": null,
+    "customfield_10016": null,
+    "customfield_10017": null,
+    "customfield_10019": "0|i0000n:",
+    "timeestimate": null,
+    "aggregatetimeoriginalestimate": null,
+    "versions": [],
+    "issuelinks": [
+      {
+        "id": "10000",
+        "self": "https://example.atlassian.net/rest/api/3/issueLink/10000",
+        "type": {
+          "id": "10000",
+          "name": "Blocks",
+          "inward": "is blocked by",
+          "outward": "blocks",
+          "self": "https://example.atlassian.net/rest/api/3/issueLinkType/10000"
+        },
+        "outwardIssue": {
+          "id": "10011",
+          "key": "SCRUM-12",
+          "self": "https://example.atlassian.net/rest/api/3/issue/10011",
+          "fields": {
+            "summary": "[RECON] Цель связи без разрешающей метки",
+            "status": {
+              "self": "https://example.atlassian.net/rest/api/3/status/10002",
+              "description": "",
+              "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Готово",
+              "id": "10002",
+              "statusCategory": {
+                "self": "https://example.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Готово"
+              }
+            },
+            "priority": {
+              "self": "https://example.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "issuetype": {
+              "self": "https://example.atlassian.net/rest/api/3/issuetype/10003",
+              "id": "10003",
+              "description": "С помощью заданий можно отслеживать небольшие порции работы.",
+              "iconUrl": "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Задание",
+              "subtask": false,
+              "avatarId": 10318,
+              "entityId": "7c9bccb0-a2fc-439b-a5fb-c11f2d94f245",
+              "hierarchyLevel": 0
+            }
+          }
+        }
+      }
+    ],
+    "assignee": {
+      "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+      "accountId": "test-account-1",
+      "emailAddress": "user1@example.test",
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      },
+      "displayName": "Тестовый пользователь 1",
+      "active": true,
+      "timeZone": "Asia/Yekaterinburg",
+      "accountType": "atlassian"
+    },
+    "updated": "2026-11-11T05:49:08.580+0500",
+    "status": {
+      "self": "https://example.atlassian.net/rest/api/3/status/10001",
+      "description": "В данный момент по этой проблеме ведется активная работа назначенным лицом.",
+      "iconUrl": "https://example.atlassian.net/images/icons/statuses/generic.png",
+      "name": "В работе",
+      "id": "10001",
+      "statusCategory": {
+        "self": "https://example.atlassian.net/rest/api/3/statuscategory/4",
+        "id": 4,
+        "key": "indeterminate",
+        "colorName": "yellow",
+        "name": "В работе"
+      }
+    },
+    "components": [],
+    "timeoriginalestimate": null,
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Тестовая задача для разведки интеграции Jira. Только вымышленные данные. Сценарий: исполнитель, intern-visible, активный спринт."
+            }
+          ],
+          "attrs": {
+            "localId": "4196dc1fb05d"
+          }
+        }
+      ]
+    },
+    "timetracking": {},
+    "customfield_10015": null,
+    "security": null,
+    "attachment": [],
+    "aggregatetimeestimate": null,
+    "summary": "[RECON] Разрешённая задача активного спринта",
+    "creator": {
+      "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+      "accountId": "test-account-1",
+      "emailAddress": "user1@example.test",
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      },
+      "displayName": "Тестовый пользователь 1",
+      "active": true,
+      "timeZone": "Asia/Yekaterinburg",
+      "accountType": "atlassian"
+    },
+    "subtasks": [],
+    "reporter": {
+      "self": "https://example.atlassian.net/rest/api/3/user?accountId=test-account-1",
+      "accountId": "test-account-1",
+      "emailAddress": "user1@example.test",
+      "avatarUrls": {
+        "48x48": "https://example.test/avatar/48x48.png",
+        "24x24": "https://example.test/avatar/24x24.png",
+        "16x16": "https://example.test/avatar/16x16.png",
+        "32x32": "https://example.test/avatar/32x32.png"
+      },
+      "displayName": "Тестовый пользователь 1",
+      "active": true,
+      "timeZone": "Asia/Yekaterinburg",
+      "accountType": "atlassian"
+    },
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_10000": "{}",
+    "customfield_10001": null,
+    "customfield_10046": null,
+    "environment": null,
+    "duedate": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "votes": {
+      "self": "https://example.atlassian.net/rest/api/3/issue/SCRUM-5/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "comment": {
+      "comments": [],
+      "self": "https://example.atlassian.net/rest/api/3/issue/10004/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  }
+}

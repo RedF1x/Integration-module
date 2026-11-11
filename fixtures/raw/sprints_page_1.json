@@ -1,0 +1,28 @@
+{
+  "maxResults": 2,
+  "startAt": 0,
+  "total": 4,
+  "isLast": false,
+  "values": [
+    {
+      "id": 4,
+      "self": "https://example.atlassian.net/rest/agile/1.0/sprint/4",
+      "state": "closed",
+      "name": "[RECON] Исторический спринт",
+      "startDate": "2026-11-11T00:47:00.647Z",
+      "endDate": "2026-11-12T00:47:00.647Z",
+      "completeDate": "2026-11-11T00:47:01.484Z",
+      "createdDate": "2026-11-11T00:46:57.863Z",
+      "originBoardId": 1
+    },
+    {
+      "id": 2,
+      "self": "https://example.atlassian.net/rest/agile/1.0/sprint/2",
+      "state": "active",
+      "name": "SCRUM Sprint 0",
+      "startDate": "2026-11-07T19:34:48.917Z",
+      "endDate": "2026-11-21T19:34:48.917Z",
+      "originBoardId": 1
+    }
+  ]
+}

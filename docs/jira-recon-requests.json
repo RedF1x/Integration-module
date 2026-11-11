@@ -1,0 +1,552 @@
+[
+  {
+    "method": "GET",
+    "path": "/rest/api/3/project/SCRUM",
+    "body": null,
+    "status": 200,
+    "fixture": "project.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/field",
+    "body": null,
+    "status": 200,
+    "fixture": "fields.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board?projectKeyOrId=SCRUM&maxResults=2",
+    "body": null,
+    "status": 200,
+    "fixture": "boards.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board/1/configuration",
+    "body": null,
+    "status": 200,
+    "fixture": "board_configuration.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/project/SCRUM/statuses",
+    "body": null,
+    "status": 200,
+    "fixture": "project_statuses.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/priority/search?maxResults=50",
+    "body": null,
+    "status": 200,
+    "fixture": "priorities.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2
+    },
+    "status": 200,
+    "fixture": "search_page_1.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-008"
+    },
+    "status": 200,
+    "fixture": "search_page_2.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-009"
+    },
+    "status": 200,
+    "fixture": "search_page_3.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-010"
+    },
+    "status": 200,
+    "fixture": "search_page_4.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-011"
+    },
+    "status": 200,
+    "fixture": "search_page_5.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-012"
+    },
+    "status": 200,
+    "fixture": "search_page_6.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-20261111\" ORDER BY key ASC",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "nextPageToken": "fixture-page-token-013"
+    },
+    "status": 200,
+    "fixture": "search_page_7.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "project = SCRUM AND labels = \"recon-never-created-20261111\"",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2
+    },
+    "status": 200,
+    "fixture": "search_empty.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board/1/sprint?startAt=0&maxResults=2",
+    "body": null,
+    "status": 200,
+    "fixture": "sprints_page_1.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board/1/sprint?startAt=2&maxResults=2",
+    "body": null,
+    "status": 200,
+    "fixture": "sprints_page_2.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-11/comment?startAt=0&maxResults=2&expand=renderedBody",
+    "body": null,
+    "status": 200,
+    "fixture": "comments_page_1.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-11/comment?startAt=2&maxResults=2&expand=renderedBody",
+    "body": null,
+    "status": 200,
+    "fixture": "comments_page_2.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-11/comment?startAt=4&maxResults=2&expand=renderedBody",
+    "body": null,
+    "status": 200,
+    "fixture": "comments_page_3.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-5?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_active.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-6?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_unassigned.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-7?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_hidden.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-8?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_backlog.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-9?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_future.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-10?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_history.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-11?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_comments.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-12?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_link_target.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-13?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_empty.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-14?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_formatted.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-15?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_personal.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-14",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_formatted_without_expand.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-16?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_before_change.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-16?expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_after_change.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "key = SCRUM-16",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "maxResults": 2,
+      "reconcileIssues": [
+        10015
+      ]
+    },
+    "status": 200,
+    "fixture": "search_revoked.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_1.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-002",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_2.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-003",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_3.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-004",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_4.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-005",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_5.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-006",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_6.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-007",
+    "body": null,
+    "status": 200,
+    "fixture": "board_recon_page_7.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/sprint/2/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC",
+    "body": null,
+    "status": 200,
+    "fixture": "sprint_recon_page_1.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/sprint/2/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-014",
+    "body": null,
+    "status": 200,
+    "fixture": "sprint_recon_page_2.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/sprint/2/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-015",
+    "body": null,
+    "status": 200,
+    "fixture": "sprint_recon_page_3.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/sprint/2/issue?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-016",
+    "body": null,
+    "status": 200,
+    "fixture": "sprint_recon_page_4.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/backlog?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC",
+    "body": null,
+    "status": 200,
+    "fixture": "backlog_recon_page_1.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/board/1/backlog?maxResults=2&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&jql=labels+%3D+%22recon-20261111%22+ORDER+BY+key+ASC&nextPageToken=fixture-page-token-001",
+    "body": null,
+    "status": 200,
+    "fixture": "backlog_recon_page_2.json"
+  },
+  {
+    "method": "POST",
+    "path": "/rest/api/3/search/jql",
+    "body": {
+      "jql": "key = SCRUM-5",
+      "fields": [
+        "project",
+        "summary",
+        "issuetype",
+        "status",
+        "assignee",
+        "labels",
+        "updated",
+        "priority",
+        "description",
+        "issuelinks",
+        "comment",
+        "customfield_10020",
+        "customfield_10019",
+        "customfield_10046"
+      ],
+      "expand": "renderedFields",
+      "maxResults": 2
+    },
+    "status": 200,
+    "fixture": "search_single_expanded.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/software/1.0/sprint/2/issue?jql=key+%3D+SCRUM-5&fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&expand=renderedFields&maxResults=2",
+    "body": null,
+    "status": 200,
+    "fixture": "sprint_single_expanded.json"
+  },
+  {
+    "method": "GET",
+    "path": "/rest/api/3/issue/SCRUM-5?fields=project%2Csummary%2Cissuetype%2Cstatus%2Cassignee%2Clabels%2Cupdated%2Cpriority%2Cdescription%2Cissuelinks%2Ccomment%2Ccustomfield_10020%2Ccustomfield_10019%2Ccustomfield_10046&expand=renderedFields",
+    "body": null,
+    "status": 200,
+    "fixture": "issue_single_expanded.json"
+  }
+]

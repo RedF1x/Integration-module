@@ -1,0 +1,59 @@
+{
+  "id": 1,
+  "name": "SCRUM board",
+  "type": "simple",
+  "self": "https://example.atlassian.net/rest/agile/1.0/board/1/configuration",
+  "location": {
+    "type": "project",
+    "key": "SCRUM",
+    "id": "10000",
+    "self": "https://example.atlassian.net/rest/api/2/project/10000",
+    "name": "Учебный проект Jira"
+  },
+  "filter": {
+    "id": "10000",
+    "self": "https://example.atlassian.net/rest/api/2/filter/10000"
+  },
+  "columnConfig": {
+    "columns": [
+      {
+        "name": "To Do",
+        "statuses": [
+          {
+            "id": "10000",
+            "self": "https://example.atlassian.net/rest/api/2/status/10000"
+          }
+        ]
+      },
+      {
+        "name": "In Progress",
+        "statuses": [
+          {
+            "id": "10001",
+            "self": "https://example.atlassian.net/rest/api/2/status/10001"
+          }
+        ]
+      },
+      {
+        "name": "Done",
+        "statuses": [
+          {
+            "id": "10002",
+            "self": "https://example.atlassian.net/rest/api/2/status/10002"
+          }
+        ]
+      }
+    ],
+    "constraintType": "none"
+  },
+  "estimation": {
+    "type": "field",
+    "field": {
+      "fieldId": "customfield_10016",
+      "displayName": "Story point estimate"
+    }
+  },
+  "ranking": {
+    "rankCustomFieldId": 10019
+  }
+}
