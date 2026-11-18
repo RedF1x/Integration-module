@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "project": "project.json",
+  "fields": "fields.json",
+  "board": "board_configuration.json",
+  "statuses": "project_statuses.json",
+  "sprints": ["sprints_page_1.json", "sprints_page_2.json"],
+  "priorities": ["priorities.json"],
+  "issues": [
+    "issue_active.json", "issue_unassigned.json", "issue_hidden.json",
+    "issue_backlog.json", "issue_future.json", "issue_history.json",
+    "issue_comments.json", "issue_link_target.json", "issue_empty.json",
+    "issue_formatted.json", "issue_personal.json", "issue_after_change.json"
+  ],
+  "comments": {
+    "SCRUM-11": ["comments_page_1.json", "comments_page_2.json", "comments_page_3.json"]
+  }
+}
