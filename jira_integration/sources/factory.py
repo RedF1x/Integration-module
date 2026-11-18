@@ -1,20 +1,23 @@
-"""Выбор источника по JIRA_SOURCE (mock | rest). Владелец: Бэкенд А."""
-from __future__ import annotations
+"""Источники raw для одного общего конвейера нормализации и политики."""
 
 import os
 from pathlib import Path
 
-from jira_integration.sources.base import IssueSource, SourceError
-from jira_integration.sources.file_source import FileSource
+from .base import SourceError
+from .config import DataConfig
+from .raw_file_source import RawFileSource
+from .rest_source import RestSource
 
-DEFAULT_MOCK_DIR = Path(__file__).resolve().parents[2] / "fixtures" / "dto"
+DEFAULT_MANIFEST = Path(__file__).resolve().parents[2] / "fixtures/raw/sprint2.json"
 
 
-def get_source() -> IssueSource:
+def get_source():
+    config = DataConfig.from_env()
     kind = os.environ.get("JIRA_SOURCE", "mock").lower()
     if kind == "mock":
-        return FileSource(os.environ.get("JIRA_MOCK_DIR", DEFAULT_MOCK_DIR))
+        return RawFileSource(
+            os.environ.get("JIRA_RAW_MANIFEST", DEFAULT_MANIFEST), config
+        )
     if kind == "rest":
-        # RestSource появится в спринте 2 (задача А4)
-        raise SourceError("JIRA_SOURCE=rest: RestSource ещё не реализован")
-    raise SourceError(f"Неизвестное значение JIRA_SOURCE: {kind!r}")
+        return RestSource(config)
+    raise SourceError("Неизвестный JIRA_SOURCE; допустимы mock и rest")
