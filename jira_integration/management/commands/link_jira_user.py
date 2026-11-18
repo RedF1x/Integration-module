@@ -9,6 +9,12 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("username", help="Логин пользователя Django")
+        parser.add_argument(
+            "--owner-from-assignee",
+            action="store_true",
+            help="Заполнить owner_ref значением account_id для правила по исполнителю",
+        )
+
         group = parser.add_mutually_exclusive_group(required=True)
         group.add_argument("--account-id", help="Точный account_id пользователя Jira")
         group.add_argument(
@@ -42,16 +48,44 @@ class Command(BaseCommand):
         except JiraUser.MultipleObjectsReturned:
             raise CommandError("Найдено несколько совпадений. Укажи --account-id.")
 
-        if profile.jira_user_id == jira_user.pk:
+        if profile.jira_user_id not in (None, jira_user.pk):
+            raise CommandError("У профиля уже есть другая привязка к Jira.")
+
+        if (
+            ModuleUser.objects.filter(jira_user=jira_user)
+            .exclude(pk=profile.pk)
+            .exists()
+        ):
+            raise CommandError("Этот пользователь Jira уже связан с другим профилем.")
+
+        update_fields = []
+
+        if options["owner_from_assignee"]:
+            if not jira_user.account_id or not jira_user.account_id.strip():
+                raise CommandError("У пользователя Jira пустой account_id.")
+
+            current_owner = profile.owner_ref
+            if (
+                current_owner
+                and current_owner.strip()
+                and current_owner != jira_user.account_id
+            ):
+                raise CommandError(
+                    "owner_ref уже содержит другое значение. "
+                    "Сначала проверь правило доступа."
+                )
+
+            if current_owner != jira_user.account_id:
+                profile.owner_ref = jira_user.account_id
+                update_fields.append("owner_ref")
+
+        if profile.jira_user_id != jira_user.pk:
+            profile.jira_user = jira_user
+            update_fields.append("jira_user")
+
+        if not update_fields:
             self.stdout.write("Эта привязка уже существует.")
             return
 
-        if profile.jira_user_id is not None:
-            raise CommandError("У профиля уже есть другая привязка к Jira.")
-
-        if ModuleUser.objects.filter(jira_user=jira_user).exists():
-            raise CommandError("Этот пользователь Jira уже связан с другим профилем.")
-
-        profile.jira_user = jira_user
-        profile.save(update_fields=["jira_user"])
-        self.stdout.write(self.style.SUCCESS("Пользователь Jira привязан."))
+        profile.save(update_fields=update_fields)
+        self.stdout.write(self.style.SUCCESS("Привязка профиля сохранена."))
