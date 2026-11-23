@@ -1,0 +1,12 @@
+{% extends "jira_integration/base.html" %}
+
+{% block title %}Нет доступа — Модуль Jira{% endblock %}
+
+{% block content %}
+<section class="jira-panel">
+    <h1>Нет доступа</h1>
+    <p>Для этой страницы нужен активный профиль практиканта.</p>
+    <p>Если доступ должен быть, обратитесь к ответственному за модуль.</p>
+    <a href="{% url 'jira_integration:index' %}">На главную</a>
+</section>
+{% endblock %}

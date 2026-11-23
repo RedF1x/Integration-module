@@ -7,6 +7,9 @@ app_name = "jira_integration"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("board/", views.board, name="board"),
+    path("backlog/", views.backlog, name="backlog"),
+    path("issues/<str:key>/", views.issue_detail, name="issue"),
     path(
         "login/",
         auth_views.LoginView.as_view(

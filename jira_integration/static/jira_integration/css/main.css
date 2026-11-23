@@ -1,0 +1,889 @@
+:root {
+  /* 1. Брендовая палитра SkillMap */
+  --app-primary: #C02BFF;
+  --app-primary-rgb: 192, 43, 255;
+  --app-primary-hover: #982EC4;
+  --app-primary-light: #F6E1FF;
+  --app-primary-soft: #FAF5FF;
+  --app-primary-soft-purple: #F0EAFB;
+  --app-primary-subtle: #F3E8FF;
+  --app-primary-border: #E9D5FF;
+  --app-primary-glow: rgba(192, 43, 255, 0.22);
+  --app-accent-purple: #ab4ad5;
+  --app-accent-violet: #7C3AED;
+  --app-accent-purple-dark: #6B21A8;
+  --app-accent-dark: #39376C;
+  --app-primary-gradient: linear-gradient(90deg, #39376C, #ab4ad5);
+  --app-skill-confirmed: #ab4ad5;
+  --app-skill-pending: #E4A8FF;
+
+  /* 2. Типографика и текст */
+  --app-font-family: 'LINE Seed', 'LINE Seed Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Размеры текста по ролям. Как и шрифт выше, задаются здесь один раз, а
+     страницы только ссылаются на них: раньше каждая страница писала свой
+     размер, и заголовок, подзаголовок или поле поиска на разных страницах
+     выглядели по-разному. */
+  --app-font-size-page-title: clamp(1.375rem, 3vw, 1.625rem);
+  --app-font-size-page-subtitle: 0.875rem;
+  --app-font-size-dialog-title: clamp(1rem, 2vw, 1.125rem);
+  --app-font-size-search: 0.875rem;
+  --app-font-size-label: 0.625rem;
+  --app-font-size-control: 0.8125rem;
+  --app-font-size-count: 0.875rem;
+  --app-font-size-empty-title: 1.125rem;
+  --app-text-main: #1E1E1E;
+  --app-text-dark: #374151;
+  --app-text-muted: #535353;
+  --app-text-sub: #6B7280;
+  --app-text-light: #9CA3AF;
+  --app-text-inverse: #FFFFFF;
+
+  /* 3. Фоны и подложки */
+  --app-bg: #F2F5FF;
+  --app-card-bg: #FFFFFF;
+  --app-bg-muted: #F9FAFB;
+  --app-bg-subtle: #F3F4F6;
+  --app-bg-alt: #F8FAFC;
+  --app-bg-panel: #FBFAFF;
+  --app-bg-gray: #EEF0F6;
+  --app-header-bg: rgba(255, 255, 255, 0.96);
+  --app-overlay-bg: rgba(0, 0, 0, 0.45);
+  --app-modal-backdrop: rgba(15, 23, 42, 0.55);
+
+  /* 4. Границы и разделители */
+  --app-border: #E5E7EB;
+  --app-border-light: #F3F4F6;
+  --app-border-subtle: #F1F5F9;
+  --app-border-alt: #E5E5E5;
+  --app-border-divider: #ECECEC;
+  --app-border-strong: #D1D5DB;
+  --app-border-input: #A1A1A1;
+  --app-border-gray: #D3D3D3;
+  /* Рамка неотмеченного чекбокса. В светлой теме — та же, что у прочих
+     плотных рамок; в тёмной своя, см. ниже. */
+  --app-checkbox-border: var(--app-border-strong);
+
+  /* 5. Статусные цвета */
+  --app-success: #15803D;
+  --app-success-bg: #E6F9EE;
+  --app-success-border: #B7EACB;
+  --app-error: #DC2626;
+  --app-error-bg: #FEE2E2;
+  --app-error-border: #FCA5A5;
+  /* Красный для полупрозрачных оттенков — rgba(var(--app-error-tint-rgb), 0.2).
+     Тот же приём, что --app-primary-rgb выше. */
+  --app-error-tint-rgb: 239, 68, 68;
+  --app-warning: #B45309;
+  --app-warning-bg: #FEF3C7;
+  --app-warning-border: #FDE68A;
+
+  /* 6. Акцентные цвета интерфейса */
+  --app-accent-green: #22C55E;
+  --app-accent-red: #EF4444;
+  --app-accent-orange: #F59E0B;
+
+  /* 7. Скругления и тени */
+  --app-radius-card: 1.25rem;
+  --app-radius-section: 1rem;
+  --app-radius-btn: 0.625rem;
+  /* Скругление всех элементов строки фильтров на страницах: поля, поиск,
+     «Сбросить» и «Экспорт». Раньше одни страницы брали 0.75rem, другие —
+     --app-radius-btn (0.625rem), и одинаковые поля выглядели по-разному. */
+  --app-radius-filter: 0.75rem;
+  --app-radius-pill: 9999px;
+  --app-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --app-shadow-card: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --app-shadow-hover: 0 8px 30px rgba(192, 43, 255, 0.08);
+  --app-shadow-modal: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.15);
+  --app-shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --app-shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.03);
+
+  /* 8. Адаптивные контрольные точки (Grid Breakpoints)
+     Mobile: <= 540px | Tablet: <= 768px / 900px | Desktop: > 1024px */
+  --app-bp-mobile: 540px;
+  --app-bp-tablet: 768px;
+  --app-bp-desktop: 1024px;
+
+  /* 9. Скроллбары */
+  --app-scrollbar-thumb: #E0C4EE;
+  --app-scrollbar-hover: #C02BFF;
+
+  /* 10. Уровни навыков (Level Badges) */
+  --app-level-expert: #F2ACAC;
+  --app-level-expert-bg: #FEE2E2;
+  --app-level-expert-text: #991B1B;
+  --app-level-expert-border: #FCA5A5;
+  --app-level-expert-soft: #FBD5D5;
+
+  --app-level-advanced: #EDC9AD;
+  --app-level-advanced-bg: #FFEDD5;
+  --app-level-advanced-text: #9A3412;
+  --app-level-advanced-border: #FDBA74;
+  --app-level-advanced-soft: #FCEFD1;
+
+  --app-level-experienced: #F4F3B5;
+  --app-level-experienced-bg: #FEF9C3;
+  --app-level-experienced-text: #854D0E;
+  --app-level-experienced-border: #FDE047;
+  --app-level-experienced-soft: #F4E3B5;
+
+  --app-level-novice: #C0E6BC;
+  --app-level-novice-bg: #DCFCE7;
+  --app-level-novice-text: #166534;
+  --app-level-novice-border: #86EFAC;
+  --app-level-novice-soft: #D7F5E3;
+
+  /* 10. Дополнительные палитры тегов и бейджей */
+  --app-orange-bg: #FFF7ED;
+  --app-orange-border: #FFEDD5;
+  --app-orange-text: #C2410C;
+  --app-amber-bg: #FFF8E8;
+  --app-amber-border: #FCE7B5;
+  --app-amber-text: #9A6400;
+}
+
+[data-theme="dark"] {
+  /* 1. Брендовая палитра SkillMap в тёмной теме */
+  --app-primary: #C846FF;
+  --app-primary-rgb: 200, 70, 255;
+  --app-primary-hover: #D770FF;
+  --app-primary-light: #341846;
+  --app-primary-soft: #231330;
+  --app-primary-soft-purple: #2B163B;
+  --app-primary-subtle: #381A4E;
+  --app-primary-border: #5C277E;
+  --app-primary-glow: rgba(200, 70, 255, 0.25);
+  --app-accent-purple: #C85CFF;
+  --app-accent-violet: #9E65FF;
+  --app-accent-purple-dark: #E6B8FF;
+  --app-accent-dark: #B4A9FF;
+  --app-primary-gradient: linear-gradient(90deg, #9E65FF, #D770FF);
+  --app-skill-confirmed: #C85CFF;
+  --app-skill-pending: #E6B8FF;
+
+  /* 2. Типографика и текст */
+  --app-text-main: #F3F4F6;
+  --app-text-dark: #E5E7EB;
+  --app-text-muted: #A1A1AA;
+  --app-text-sub: #9CA3AF;
+  --app-text-light: #80808E;
+  --app-text-inverse: #FFFFFF;
+
+  /* 3. Фоны и подложки (замена белых оттенков на благородные тёмные тона) */
+  --app-bg: #0F0D15;
+  --app-card-bg: #181523;
+  --app-bg-muted: #1E1A2C;
+  --app-bg-subtle: #241F35;
+  --app-bg-alt: #13111C;
+  --app-bg-panel: #1C182A;
+  --app-bg-gray: #221D32;
+  --app-header-bg: rgba(18, 15, 27, 0.88);
+  --app-overlay-bg: rgba(0, 0, 0, 0.7);
+  --app-modal-backdrop: rgba(0, 0, 0, 0.75);
+
+  /* 4. Границы и разделители */
+  --app-border: #2D2741;
+  --app-border-light: #241F35;
+  --app-border-subtle: #1F1B2E;
+  --app-border-alt: #362E4E;
+  --app-border-divider: #262137;
+  --app-border-strong: #483E67;
+  --app-border-input: #504673;
+  --app-border-gray: #3B3454;
+  /* Раньше чекбокс брал --app-border-strong, а #483E67 на тёмной карточке
+     почти не виден — пустой квадратик сливался с фоном. */
+  --app-checkbox-border: var(--app-text-light);
+
+  /* 5. Статусные цвета */
+  --app-success: #4ADE80;
+  --app-success-bg: rgba(34, 197, 94, 0.16);
+  --app-success-border: rgba(34, 197, 94, 0.35);
+  --app-error: #F87171;
+  --app-error-bg: rgba(239, 68, 68, 0.20);
+  --app-error-border: rgba(248, 113, 113, 0.55);
+  /* Та же база, из которой собраны --app-error-bg и --app-level-expert-*:
+     не светлый --app-error (#F87171), а исходный красный. */
+  --app-error-tint-rgb: 239, 68, 68;
+  --app-warning: #FBBF24;
+  --app-warning-bg: rgba(245, 158, 11, 0.16);
+  --app-warning-border: rgba(245, 158, 11, 0.35);
+
+  /* 6. Акцентные цвета интерфейса */
+  --app-accent-green: #4ADE80;
+  --app-accent-red: #F87171;
+  --app-accent-orange: #FBBF24;
+
+  /* 7. Скругления и тени */
+  --app-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --app-shadow-card: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --app-shadow-hover: 0 8px 30px rgba(200, 70, 255, 0.2);
+  --app-shadow-modal: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.55);
+  --app-shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --app-shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+  /* 8. Скроллбары */
+  --app-scrollbar-thumb: #47325D;
+  --app-scrollbar-hover: #7D49A8;
+
+  /* 9. Уровни навыков (Level Badges) */
+  --app-level-expert: #5A2020;
+  --app-level-expert-bg: rgba(239, 68, 68, 0.2);
+  --app-level-expert-text: #FCA5A5;
+  --app-level-expert-border: rgba(239, 68, 68, 0.38);
+  --app-level-expert-soft: #381515;
+
+  --app-level-advanced: #52341A;
+  --app-level-advanced-bg: rgba(249, 115, 22, 0.2);
+  --app-level-advanced-text: #FDBA74;
+  --app-level-advanced-border: rgba(249, 115, 22, 0.38);
+  --app-level-advanced-soft: #332010;
+
+  --app-level-experienced: #474418;
+  --app-level-experienced-bg: rgba(234, 179, 8, 0.2);
+  --app-level-experienced-text: #FDE047;
+  --app-level-experienced-border: rgba(234, 179, 8, 0.38);
+  --app-level-experienced-soft: #2E2C10;
+
+  --app-level-novice: #1B3D1E;
+  --app-level-novice-bg: rgba(34, 197, 94, 0.2);
+  --app-level-novice-text: #86EFAC;
+  --app-level-novice-border: rgba(34, 197, 94, 0.38);
+  --app-level-novice-soft: #122613;
+
+  /* 10. Дополнительные палитры тегов и бейджей */
+  --app-orange-bg: rgba(249, 115, 22, 0.14);
+  --app-orange-border: rgba(249, 115, 22, 0.32);
+  --app-orange-text: #FB923C;
+  --app-amber-bg: rgba(217, 119, 6, 0.16);
+  --app-amber-border: rgba(217, 119, 6, 0.35);
+  --app-amber-text: #FCD34D;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html,
+body,
+dialog {
+  font-family: var(--app-font-family);
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   ДОСТУПНОСТЬ (A11Y): ВИДИМЫЙ ФОКУС ПРИ НАВИГАЦИИ С КЛАВИАТУРЫ (WCAG 2.1)
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+}
+
+input:not([class*="search"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: var(--app-primary);
+  box-shadow: 0 0 0 3px var(--app-primary-glow);
+}
+
+/* ==========================================================================
+   ИКОНКИ: черные в светлой теме, светло-фиолетовые (#E6B8FF) в тёмной
+   ========================================================================== */
+[data-theme="dark"] .profile-info-icon,
+[data-theme="dark"] .icon-small,
+[data-theme="dark"] .skills-icon-small,
+[data-theme="dark"] .proj-icon-small,
+[data-theme="dark"] img[src*="city.svg"],
+[data-theme="dark"] img[src*="phone.svg"],
+[data-theme="dark"] img[src*="email.svg"],
+[data-theme="dark"] img[src*="edit.svg"],
+[data-theme="dark"] img[src*="upload.svg"],
+[data-theme="dark"] img[src*="search.svg"],
+[data-theme="dark"] img[src*="pending-clock.svg"],
+[data-theme="dark"] .matrix-search-icon,
+[data-theme="dark"] .dept-search-icon,
+[data-theme="dark"] .appr-search-icon,
+[data-theme="dark"] .ask-search-icon,
+[data-theme="dark"] .projs-search-icon,
+[data-theme="dark"] .projs-people-search-icon,
+[data-theme="dark"] .resv-search-icon {
+  filter: brightness(0) saturate(100%) invert(80%) sepia(30%) saturate(300%) hue-rotate(240deg) brightness(105%);
+  opacity: 0.92;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+[data-theme="dark"] img[src*="trash.svg"] {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(85%) saturate(2500%) hue-rotate(320deg) brightness(100%);
+  opacity: 0.92;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+[data-theme="dark"] .icon-small:hover,
+[data-theme="dark"] .skills-icon-small:hover,
+[data-theme="dark"] .proj-icon-small:hover,
+[data-theme="dark"] .profile-name-edit:hover .icon-small,
+[data-theme="dark"] #skillEditButton:hover .skills-icon-small,
+[data-theme="dark"] #skillEditButton.is-active .skills-icon-small,
+[data-theme="dark"] .proj-edit-btn:hover .proj-icon-small {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--app-text-main);
+  padding-top: 74px;
+  /* clip, а не hidden: у html свой overflow-x, поэтому правило body на окно
+     не переносится, и hidden делал body прокручиваемым блоком высотой с
+     содержимое — на короткой странице он обрезал раскрытые фильтры у
+     нижнего края (так было на «Проектах» с одним проектом). */
+  overflow-x: clip;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   GLOBAL APP STYLES (SkillMap)
+   Базовые глобальные стили для всего приложения. Подключается в base.html.
+   ========================================================================== */
+
+/* ДИАЛОГ ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ (см. #confirmDialog в base.html) — один
+   на всё приложение, поэтому и стили общие, здесь, а не в CSS конкретной
+   страницы. Визуальный язык — тот же, что у .proj-dialog в project.css
+   (скруглённые углы, тень, тот же шрифт) — только кнопка подтверждения
+   красная, а не фиолетовая: это единственный диалог в приложении про
+   необратимое разрушительное действие, стоит визуально отличать его от
+   обычных "Сохранить"/"Добавить". */
+/* Единая плавная анимация появления модальных окон и подложки во всем приложении */
+dialog[open] {
+    animation: appDialogAppear 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+dialog::backdrop {
+    animation: appBackdropFade 0.2s ease;
+}
+
+@keyframes appDialogAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(0.5rem) translateZ(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0) translateZ(0);
+    }
+}
+
+@keyframes appBackdropFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   ЕДИНАЯ ДИЗАЙН-СИСТЕМА ДЛЯ ШАПОК ДИАЛОГОВЫХ ОКОН (.dialog-header)
+   ========================================================================== */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(1rem, 2.5vw, 1.25rem) clamp(1rem, 3vw, 1.5rem);
+    border-bottom: 1px solid var(--app-border-divider);
+    background: var(--app-card-bg);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    box-sizing: border-box;
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: var(--app-font-size-dialog-title);
+    font-weight: 700;
+    color: var(--app-text-main);
+    letter-spacing: -0.01em;
+}
+
+.dialog-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--app-text-muted);
+    padding: 0.25rem;
+    margin: -0.25rem;
+    border-radius: var(--app-radius-btn, 0.625rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background 0.15s ease;
+    width: 2rem;
+    height: 2rem;
+    box-sizing: border-box;
+}
+
+.dialog-close-btn:hover {
+    color: var(--app-error);
+    background: var(--app-error-bg);
+}
+
+.confirm-dialog {
+    border: 1px solid var(--app-border);
+    border-radius: 20px;
+    padding: 24px;
+    width: 380px;
+    max-width: 90vw;
+    box-shadow: var(--app-shadow-modal);
+    font-family: inherit;
+    color: var(--app-text-dark);
+    background: var(--app-card-bg);
+    box-sizing: border-box;
+}
+
+.confirm-dialog::backdrop {
+    background: var(--app-overlay-bg);
+}
+
+.confirm-dialog h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: var(--app-text-main);
+}
+
+.confirm-dialog p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--app-text-muted);
+    line-height: 1.5;
+}
+
+/* Поле "введите Удалить" — показывается только для удалений (см. base.js).
+   :not([hidden]) — потому что display:flex иначе перебил бы атрибут hidden,
+   тот же приём, что и у переключаемых блоков в reserve.css/analytics.css. */
+.confirm-dialog-word:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.confirm-dialog-word-label {
+    font-size: 13px;
+    color: var(--app-text-muted);
+}
+
+.confirm-dialog-word-label strong {
+    color: var(--app-text-dark);
+}
+
+.confirm-dialog-word-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--app-border-strong);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--app-text-dark);
+    background: var(--app-card-bg);
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.confirm-dialog-word-input:focus {
+    outline: none;
+    border-color: var(--app-error);
+    box-shadow: 0 0 0 3px var(--app-error-bg);
+}
+
+.confirm-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.confirm-dialog-cancel {
+    background: var(--app-bg-subtle);
+    color: var(--app-text-dark);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    transition: background 0.15s ease;
+}
+
+.confirm-dialog-cancel:hover {
+    background: var(--app-border-alt);
+}
+
+[data-theme="dark"] .confirm-dialog-cancel {
+    background: var(--app-primary-soft);
+    border: 1px solid var(--app-border-strong);
+    color: var(--app-text-main);
+}
+
+[data-theme="dark"] .confirm-dialog-cancel:hover {
+    background: var(--app-primary-light);
+    border-color: var(--app-primary);
+    color: var(--app-accent-purple-dark);
+}
+
+.confirm-dialog-submit {
+    background: var(--app-error);
+    color: var(--app-text-inverse);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.15s ease;
+}
+
+.confirm-dialog-submit:hover:not(:disabled) {
+    background: var(--app-error);
+    filter: brightness(0.92);
+}
+
+/* Пока слово-подтверждение не введено, кнопка заблокирована — тем же
+   приёмом, что и кнопки диалогов в edit_profile.css. */
+.confirm-dialog-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATIONS (SkillMap)
+   Плавающие уведомления снизу экрана поверх всего контента
+   ========================================================================== */
+.toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    max-width: calc(100vw - 3rem);
+    width: 24rem;
+    pointer-events: none;
+}
+
+.toast-item {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: 0.875rem;
+    background: var(--app-card-bg);
+    color: var(--app-text-main);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    font-weight: 500;
+    box-shadow: var(--app-shadow-dropdown);
+    border: 1px solid var(--app-border);
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.toast-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.toast-item.is-leaving {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 1, 1), transform 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-content {
+    flex: 1;
+    word-break: break-word;
+}
+
+.toast-close-btn {
+    background: none;
+    border: none;
+    color: var(--app-text-light);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin: -0.25rem -0.25rem -0.25rem 0.25rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.toast-close-btn:hover {
+    color: var(--app-text-main);
+    background-color: var(--app-bg-subtle);
+}
+
+.toast-success {
+    border-left: 4px solid var(--app-success);
+}
+.toast-success .toast-icon {
+    color: var(--app-success);
+}
+
+.toast-error {
+    border-left: 4px solid var(--app-accent-red);
+}
+.toast-error .toast-icon {
+    color: var(--app-accent-red);
+}
+
+.toast-warning {
+    border-left: 4px solid var(--app-accent-orange);
+}
+.toast-warning .toast-icon {
+    color: var(--app-accent-orange);
+}
+
+.toast-info {
+    border-left: 4px solid var(--app-primary);
+}
+.toast-info .toast-icon {
+    color: var(--app-primary);
+}
+
+@media (max-width: 640px) {
+    .toast-container {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+        max-width: none;
+    }
+}
+
+/* ==========================================================================
+   КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ (.app-theme-toggle)
+   ========================================================================== */
+.app-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.375rem;
+    height: 2.375rem;
+    border-radius: 50%;
+    background: var(--app-bg-panel);
+    border: 1px solid var(--app-border-divider);
+    color: var(--app-text-muted);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.app-theme-toggle:hover {
+    background: var(--app-primary-soft);
+    border-color: var(--app-primary-border);
+    color: var(--app-primary);
+    transform: scale(1.06);
+    box-shadow: 0 4px 12px var(--app-primary-glow);
+}
+
+.app-theme-toggle:active {
+    transform: scale(0.94);
+}
+
+.app-theme-toggle:focus-visible {
+    box-shadow: 0 0 0 3px var(--app-primary-glow);
+}
+
+.theme-toggle-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+}
+
+/* В светлой теме отображается Луна */
+html:not([data-theme="dark"]) .theme-icon-sun {
+    opacity: 0;
+    transform: rotate(75deg) scale(0.4);
+    pointer-events: none;
+}
+html:not([data-theme="dark"]) .theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: var(--app-accent-dark);
+}
+
+/* В тёмной теме отображается Солнце */
+html[data-theme="dark"] .theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: var(--app-warning);
+}
+html[data-theme="dark"] .theme-icon-moon {
+    opacity: 0;
+    transform: rotate(-75deg) scale(0.4);
+    pointer-events: none;
+}
+
+
+/* ==========================================================================
+   Универсальный компонент пагинации (.app-pagination)
+   В точном соответствии с исходным UI из Approvals
+   ========================================================================== */
+.app-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    min-height: 2rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+/* Пагинация, когда страница всего одна. Два разных способа спрятать — это не
+   недосмотр, они не взаимозаменяемы:
+   -hidden оставляет место занятым (список не прыгает, когда страницы
+   появляются и исчезают на ходу) — так прячут пагинацию "Подтверждение
+   навыков", "Кого спросить?" и "Кадровый резерв";
+   -collapsed убирает блок из потока целиком — так нужно "Матрице
+   компетенций" и "Проектам", где высоту делит flex-колонка.
+   Селектор из двух классов, а не из одного: CSS страницы подключается ПОСЛЕ
+   main.css (см. base.html), поэтому любое её правило на тот же контейнер при
+   одинаковой специфичности перебило бы этот модификатор. Раньше такие
+   правила и были — .appr-pagination и .projs-pagination задавали display, —
+   сейчас их нет, но запас специфичности оставлен: следующее правило на
+   .app-pagination в CSS страницы иначе снова сломает скрытие. */
+.app-pagination.app-pagination-hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.app-pagination.app-pagination-collapsed {
+    display: none;
+}
+
+.app-page-arrow,
+.app-page-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.4rem;
+    border-radius: var(--app-radius-btn, 0.5rem);
+    border: 1px solid var(--app-border);
+    background: var(--app-card-bg);
+    color: var(--app-text-main);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.app-page-arrow:hover:not(.app-page-arrow-disabled),
+.app-page-num:hover:not(.app-page-num-active) {
+    border-color: var(--app-primary);
+    color: var(--app-primary);
+    background: var(--app-primary-soft, rgba(124, 58, 237, 0.08));
+}
+
+.app-page-arrow-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: not-allowed;
+    background: var(--app-bg-muted, #f3f4f6);
+}
+
+.app-page-num-active {
+    background: var(--app-primary) !important;
+    border-color: var(--app-primary) !important;
+    color: var(--app-text-inverse, #ffffff) !important;
+    box-shadow: 0 2px 6px rgba(var(--app-primary-rgb, 124, 58, 237), 0.25);
+}
+
+.app-page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 2rem;
+    color: var(--app-text-sub);
+    font-size: 0.875rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+@media (max-width: 480px) {
+    .app-pagination {
+        gap: 0.25rem;
+        margin-top: 1rem;
+    }
+
+    .app-page-arrow,
+    .app-page-num {
+        min-width: 1.75rem;
+        height: 1.75rem;
+        padding: 0 0.25rem;
+        font-size: 0.75rem;
+    }
+
+    .app-page-ellipsis {
+        min-width: 1rem;
+        height: 1.75rem;
+    }
+}

@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Модуль Jira{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'jira_integration/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'jira_integration/css/layout.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="jira-app">
+    {% block header %}
+    <header class="jira-header">
+        <a class="jira-logo" href="{% url 'jira_integration:index' %}">
+            Модуль Jira
+        </a>
+
+        {% if user.is_authenticated %}
+        <div class="jira-user">
+            <span>{{ user.get_username }}</span>
+
+            <form method="post" action="{% url 'jira_integration:logout' %}">
+                {% csrf_token %}
+                <button class="jira-button" type="submit">Выйти</button>
+            </form>
+        </div>
+        {% endif %}
+    </header>
+    {% endblock %}
+
+    <main id="main-content" class="jira-main">
+        <nav class="jira-navigation" aria-label="Разделы Jira">
+            <a href="{% url 'jira_integration:board' %}">Доска спринта</a>
+            <a href="{% url 'jira_integration:backlog' %}">Бэклог</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

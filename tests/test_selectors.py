@@ -15,6 +15,7 @@ from jira_integration.models import (
 )
 from jira_integration.selectors import (
     get_backlog,
+    get_backlog_filter_options,
     get_board,
     get_issue,
     visible_issues_for,
@@ -266,3 +267,75 @@ def test_backlog_loads_card_details_without_extra_queries(
         ("Готово", "Алексей"),
         ("Готово", None),
     ]
+
+
+@pytest.mark.parametrize("hidden_reason", ["foreign", "disabled", "active"])
+def test_backlog_filter_options_include_only_visible_backlog(
+    intern, make_issue, client, hidden_reason
+):
+    project = JiraProject.objects.create(
+        jira_id="1", project_key="DEMO", name="Demo", is_enabled=True
+    )
+    own_assignee = JiraUser.objects.create(
+        account_id="own-account", display_name="Доступный исполнитель"
+    )
+
+    for key in ("DEMO-1", "DEMO-2"):
+        issue = make_issue(key, project, intern.owner_ref)
+        issue.assignee = own_assignee
+        issue.save(update_fields=["assignee"])
+
+    hidden_project = project
+    hidden_owner = intern.owner_ref
+    hidden_sprint = None
+
+    if hidden_reason == "foreign":
+        hidden_owner = "another-owner"
+    elif hidden_reason == "disabled":
+        hidden_project = JiraProject.objects.create(
+            jira_id="2", project_key="OLD", name="Old", is_enabled=False
+        )
+    else:
+        hidden_sprint = JiraSprint.objects.create(
+            jira_id="10",
+            project=project,
+            name="Active",
+            state=JiraSprint.State.ACTIVE,
+        )
+
+    hidden_status = JiraStatus.objects.create(
+        jira_id="hidden-status",
+        name="Скрытый статус",
+        category="todo",
+    )
+    hidden_assignee = JiraUser.objects.create(
+        account_id="hidden-account", display_name="Скрытый исполнитель"
+    )
+    hidden_issue = make_issue(
+        "HIDDEN-1",
+        hidden_project,
+        hidden_owner,
+        sprint=hidden_sprint,
+        issue_status=hidden_status,
+    )
+    hidden_issue.assignee = hidden_assignee
+    hidden_issue.issue_type = "HiddenType"
+    hidden_issue.save(update_fields=["assignee", "issue_type"])
+
+    options = get_backlog_filter_options(intern.user)
+
+    assert options == {
+        "statuses": [("1", "К выполнению")],
+        "types": ["Task"],
+        "assignees": [("own-account", "Доступный исполнитель")],
+    }
+
+    client.force_login(intern.user)
+    response = client.get("/jira/backlog/")
+
+    assert response.status_code == 200
+    assert response.context["filter_options"] == options
+    html = response.content.decode()
+    assert "Скрытый статус" not in html
+    assert "Скрытый исполнитель" not in html
+    assert "HiddenType" not in html
