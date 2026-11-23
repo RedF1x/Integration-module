@@ -1,0 +1,173 @@
+.jira-app {
+    margin: 0;
+    padding-top: 0;
+    min-height: 100vh;
+    background: var(--app-bg);
+    color: var(--app-text-main);
+    font-family: var(--app-font-family);
+}
+
+.jira-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 18px 24px;
+    background: var(--app-card-bg);
+    border-bottom: 1px solid var(--app-border);
+}
+
+.jira-logo {
+    color: var(--app-primary);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.jira-user {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.jira-user form {
+    margin: 0;
+}
+
+.jira-button {
+    padding: 10px 18px;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius-btn);
+    background: var(--app-card-bg);
+    color: var(--app-text-main);
+    font: inherit;
+    cursor: pointer;
+}
+
+.jira-button:hover {
+    background: var(--app-primary-soft);
+}
+
+.jira-button:focus-visible,
+.jira-logo:focus-visible {
+    outline: 2px solid var(--app-primary);
+    outline-offset: 4px;
+}
+
+.jira-main {
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.jira-panel {
+    padding: 24px;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius-section);
+    background: var(--app-card-bg);
+}
+
+.jira-panel h1 {
+    margin-top: 0;
+}
+
+.jira-board-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.jira-board-column {
+    min-width: 0;
+    padding: 16px;
+    border-radius: var(--app-radius-section);
+    background: var(--app-bg-subtle);
+}
+
+.jira-board-column > h3 {
+    margin-top: 0;
+}
+
+.jira-task-card {
+    margin-top: 12px;
+    padding: 16px;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius-card);
+    background: var(--app-card-bg);
+    overflow-wrap: anywhere;
+}
+
+.jira-task-card h3 {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+.jira-task-card p {
+    color: var(--app-text-muted);
+}
+
+.jira-navigation,
+.jira-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.jira-navigation a {
+    color: var(--app-primary);
+    font-weight: 600;
+}
+
+#backlog-pagination {
+    margin-top: 24px;
+}
+
+#backlog-page {
+    display: inline-block;
+    margin: 8px 16px;
+}
+
+.jira-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+#issue-content {
+    overflow-wrap: anywhere;
+}
+
+#issue-content dl {
+    display: grid;
+    grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+    gap: 12px 20px;
+}
+
+#issue-content dt {
+    font-weight: 600;
+}
+
+#issue-content dd {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+#issue-content li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    #issue-content dl {
+        grid-template-columns: 1fr;
+    }
+
+    #issue-content dd {
+        margin-bottom: 12px;
+    }
+}

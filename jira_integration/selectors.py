@@ -82,7 +82,7 @@ def get_board(user, project_key=None):
 
 
 def get_backlog(user, filters=None, sort="rank", page=1, *, page_size=20):
-    issues = visible_issues_for(user).exclude(sprint__state=JiraSprint.State.ACTIVE)
+    issues = _backlog_issues_for(user).exclude(sprint__state=JiraSprint.State.ACTIVE)
 
     filter_fields = {
         "assignee": "assignee__account_id",
@@ -114,4 +114,35 @@ def get_backlog(user, filters=None, sort="rank", page=1, *, page_size=20):
         "count": paginator.count,
         "results": list(current_page.object_list),
         "synced_at": issues.aggregate(latest=Max("synced_at"))["latest"],
+    }
+
+
+
+
+def _backlog_issues_for(user):
+    return visible_issues_for(user).exclude(
+        sprint__state=JiraSprint.State.ACTIVE
+    )
+
+
+def get_backlog_filter_options(user):
+    issues = _backlog_issues_for(user)
+
+    return {
+        "statuses": list(
+            issues.order_by("status__name", "status__jira_id")
+            .values_list("status__jira_id", "status__name")
+            .distinct()
+        ),
+        "types": list(
+            issues.order_by("issue_type")
+            .values_list("issue_type", flat=True)
+            .distinct()
+        ),
+        "assignees": list(
+            issues.filter(assignee__isnull=False)
+            .order_by("assignee__display_name", "assignee__account_id")
+            .values_list("assignee__account_id", "assignee__display_name")
+            .distinct()
+        ),
     }

@@ -1,14 +1,11 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <title>Модуль интеграции Jira</title>
-</head>
-<body>
+{% extends "jira_integration/base.html" %}
+
+{% block title %}Главная — Модуль Jira{% endblock %}
+
+{% block content %}
+<section class="jira-panel">
+    <h1>Мои задачи Jira</h1>
     <p>Модуль интеграции Jira запущен.</p>
-    <form method="post" action="{% url 'jira_integration:logout' %}">
-        {% csrf_token %}
-        <button type="submit">Выйти</button>
-    </form>
-</body>
-</html>
+    <p><a href="{% url 'jira_integration:board' %}">Открыть доску спринта</a></p>
+</section>
+{% endblock %}

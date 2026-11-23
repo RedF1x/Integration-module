@@ -1,0 +1,95 @@
+{% extends "jira_integration/base.html" %}
+{% load static %}
+
+{% block title %}Бэклог — Модуль Jira{% endblock %}
+
+{% block content %}
+<section
+    id="jira-backlog"
+    data-api-url="{% url 'jira_integration:api_backlog' %}"
+    data-issue-url-template="{% url 'jira_integration:issue' key='ISSUEKEY' %}"
+>
+    <h1>Бэклог</h1>
+
+    <div class="jira-toolbar">
+        <label for="backlog-sort">Сортировка:</label>
+        <select id="backlog-sort" class="jira-button">
+            <option value="rank">Порядок Jira</option>
+            <option value="updated">Сначала обновлённые</option>
+            <option value="key">По ключу</option>
+            <option value="priority">По приоритету</option>
+        </select>
+    </div>
+
+    <div class="jira-toolbar">
+        <label>
+            Статус:
+            <select id="backlog-status" class="jira-button">
+                <option value="">Все статусы</option>
+                {% for value, label in filter_options.statuses %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Тип:
+            <select id="backlog-type" class="jira-button">
+                <option value="">Все типы</option>
+                {% for value in filter_options.types %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Исполнитель:
+            <select id="backlog-assignee" class="jira-button">
+                <option value="">Все исполнители</option>
+                {% for value, label in filter_options.assignees %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <button id="backlog-reset" class="jira-button" type="button">
+            Сбросить фильтры
+        </button>
+    </div>
+
+    <p id="backlog-message" role="status" aria-live="polite">
+        Загружаем задачи…
+    </p>
+
+    <a
+        id="backlog-login"
+        href="{% url 'jira_integration:login' %}?next={{ request.path|urlencode }}"
+        hidden
+    >Войти снова</a>
+
+    <button id="backlog-retry" class="jira-button" type="button" hidden>
+        Повторить загрузку
+    </button>
+
+    <p id="backlog-updated"></p>
+    <div id="backlog-list"></div>
+
+    <nav id="backlog-pagination" aria-label="Страницы бэклога" hidden>
+        <button id="backlog-prev" class="jira-button" type="button">
+            Назад
+        </button>
+        <span id="backlog-page"></span>
+        <button id="backlog-next" class="jira-button" type="button">
+            Далее
+        </button>
+    </nav>
+
+    <noscript>
+        <p>Для загрузки бэклога включите JavaScript в браузере.</p>
+    </noscript>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'jira_integration/js/backlog.js' %}" defer></script>
+{% endblock %}

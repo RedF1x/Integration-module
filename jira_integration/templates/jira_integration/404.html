@@ -1,0 +1,11 @@
+{% extends "jira_integration/base.html" %}
+
+{% block title %}Страница не найдена — Модуль Jira{% endblock %}
+
+{% block content %}
+<section class="jira-panel">
+    <h1>Страница не найдена</h1>
+    <p>Возможно, адрес указан неверно или задача недоступна.</p>
+    <a href="{% url 'jira_integration:board' %}">Вернуться к доске</a>
+</section>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "jira_integration/base.html" %}
+{% load static %}
+
+{% block title %}Задача — Модуль Jira{% endblock %}
+
+{% block content %}
+<section
+    id="jira-issue"
+    data-api-url="{% url 'jira_integration:api_issue' key=issue_key %}"
+    data-issue-url-template="{% url 'jira_integration:issue' key='ISSUEKEY' %}"
+>
+    <p id="issue-message" role="status" aria-live="polite">
+        Загружаем задачу…
+    </p>
+
+    <a
+        id="issue-login"
+        href="{% url 'jira_integration:login' %}?next={{ request.path|urlencode }}"
+        hidden
+    >Войти снова</a>
+
+    <button id="issue-retry" class="jira-button" type="button" hidden>
+        Повторить загрузку
+    </button>
+
+    <article id="issue-content" class="jira-panel" hidden>
+        <strong id="issue-key"></strong>
+        <h1 id="issue-summary"></h1>
+        <dl id="issue-details"></dl>
+
+        <h2>Описание</h2>
+        <p>Показ описаний пока отключён.</p>
+
+        <h2>Дополнительные поля</h2>
+        <dl id="issue-fields"></dl>
+        <p id="issue-fields-empty" hidden>Нет доступных дополнительных полей.</p>
+
+        <h2>Связанные задачи</h2>
+        <ul id="issue-links"></ul>
+        <p id="issue-links-empty" hidden>Нет доступных связанных задач.</p>
+
+        <h2>Комментарии</h2>
+        <p>Показ комментариев пока отключён.</p>
+    </article>
+
+    <noscript>
+        <p>Для загрузки задачи включите JavaScript в браузере.</p>
+    </noscript>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'jira_integration/js/issue.js' %}" defer></script>
+{% endblock %}
