@@ -1,5 +1,6 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+from pathlib import Path
 
 import pytest
 
@@ -7,7 +8,9 @@ from jira_integration.sources import FileSource, SourceError, get_source
 
 
 def test_file_source_reads_sample():
-    src = get_source()  # по умолчанию mock -> fixtures/dto
+    src = FileSource(
+        Path(__file__).resolve().parents[2] / "fixtures/dto"
+    )  # Совместимый DTO-адаптер спринта 1; фабрика теперь выбирает raw.
     assert isinstance(src, FileSource)
     assert [p.key for p in src.projects()] == ["DEMO"]
     assert len(list(src.issues())) == 4
@@ -17,8 +20,8 @@ def test_file_source_reads_sample():
 
 
 def test_since_filter():
-    src = get_source()
-    since = datetime(2026, 11, 5, tzinfo=timezone.utc)
+    src = FileSource(Path(__file__).resolve().parents[2] / "fixtures/dto")
+    since = datetime(2026, 11, 5, tzinfo=UTC)
     assert sorted(i.key for i in src.issues(since)) == ["DEMO-2", "DEMO-4"]
 
 
@@ -28,7 +31,9 @@ def test_missing_dir(tmp_path):
 
 
 def test_broken_file_does_not_leak_content(tmp_path):
-    (tmp_path / "bad.json").write_text(json.dumps({"projects": [], "issues": [{"key": "SECRET-1"}]}), encoding="utf-8")
+    (tmp_path / "bad.json").write_text(
+        json.dumps({"projects": [], "issues": [{"key": "SECRET-1"}]}), encoding="utf-8"
+    )
     with pytest.raises(SourceError) as info:
         FileSource(tmp_path)
     assert "SECRET" not in str(info.value)
@@ -59,9 +64,7 @@ def test_factory_unknown_and_rest(monkeypatch):
     ],
 )
 def test_invalid_file_structure_raises_source_error(tmp_path, payload):
-    (tmp_path / "invalid.json").write_text(
-        json.dumps(payload), encoding="utf-8"
-    )
+    (tmp_path / "invalid.json").write_text(json.dumps(payload), encoding="utf-8")
 
     with pytest.raises(SourceError):
         FileSource(tmp_path)
@@ -78,13 +81,19 @@ def test_valid_empty_file_is_allowed(tmp_path):
     assert list(source.issues()) == []
 
 
-@pytest.mark.parametrize(("field_name", "value"), [
-    ("comments", 123), ("links", 123), ("custom_fields", 123),
-    ("comments", [123]), ("links", [123]),
-    ("updated_at", "2026-11-11T12:00:00"),
-])
+@pytest.mark.parametrize(
+    ("field_name", "value"),
+    [
+        ("comments", 123),
+        ("links", 123),
+        ("custom_fields", 123),
+        ("comments", [123]),
+        ("links", [123]),
+        ("updated_at", "2026-11-11T12:00:00"),
+    ],
+)
 def test_invalid_nested_values_raise_source_error(tmp_path, field_name, value):
-    sample = get_source()
+    sample = FileSource(Path(__file__).resolve().parents[2] / "fixtures/dto")
     issue = sample.issue_detail("DEMO-1").to_dict()
     issue[field_name] = value
     (tmp_path / "invalid.json").write_text(
@@ -94,19 +103,26 @@ def test_invalid_nested_values_raise_source_error(tmp_path, field_name, value):
         FileSource(tmp_path)
 
 
-@pytest.mark.parametrize("timestamp", [
-    "2026-11-11T12:00:00Z",
-    "2026-11-11T15:00:00+03:00",
-    "2026-11-11T15:00:00+0300",
-])
+@pytest.mark.parametrize(
+    "timestamp",
+    [
+        "2026-11-11T12:00:00Z",
+        "2026-11-11T15:00:00+03:00",
+        "2026-11-11T15:00:00+0300",
+    ],
+)
 def test_since_filter_handles_offsets_and_includes_boundary(tmp_path, timestamp):
-    issue = get_source().issue_detail("DEMO-1").to_dict()
+    issue = (
+        FileSource(Path(__file__).resolve().parents[2] / "fixtures/dto")
+        .issue_detail("DEMO-1")
+        .to_dict()
+    )
     issue["updated_at"] = timestamp
     (tmp_path / "sample.json").write_text(
         json.dumps({"projects": [], "issues": [issue]}), encoding="utf-8"
     )
     source = FileSource(tmp_path)
-    boundary = datetime(2026, 11, 11, 12, tzinfo=timezone.utc)
+    boundary = datetime(2026, 11, 11, 12, tzinfo=UTC)
     assert [item.key for item in source.issues(boundary)] == ["DEMO-1"]
-    after = datetime(2026, 11, 11, 12, 0, 1, tzinfo=timezone.utc)
+    after = datetime(2026, 11, 11, 12, 0, 1, tzinfo=UTC)
     assert list(source.issues(after)) == []
