@@ -5,7 +5,7 @@ from jira_integration.dto import parse_iso
 from jira_integration.normalizer.catalog import build_catalog
 
 from .base import SourceError
-from .http import offset_pages
+from .http import InvalidCursor, offset_pages
 from .raw import RawSource
 
 
@@ -77,6 +77,33 @@ class RawFileSource(RawSource):
             if raw["key"] == key:
                 return raw
         raise SourceError("Задача отсутствует в raw-манифесте")
+
+    def issue_page(self, since, until, token=None, *, extra_fields=()):
+        # Mock-манифест мал: фильтруем его полностью и имитируем курсор Jira.
+        rows = sorted(
+            (
+                r
+                for r in self.raw_issues(since)
+                if until is None or parse_iso(r["fields"]["updated"]) < until
+            ),
+            key=lambda r: r["key"],
+        )
+        start = 0
+        if token is not None:
+            if not isinstance(token, str) or not token.isascii() or not token.isdigit():
+                raise InvalidCursor("Неверный mock-курсор")
+            start = int(token)
+            if start < 1 or start >= len(rows) or start % 50:
+                raise InvalidCursor("Неверный mock-курсор")
+        end = start + 50
+        return rows[start:end], str(end) if end < len(rows) else None
+
+    def bulk_issues(self, ids, *, extra_fields=()):
+        wanted = set(ids)
+        if not 1 <= len(wanted) <= 50:
+            raise SourceError("Для сверки требуется от 1 до 50 Jira ID")
+        rows = [r for r in self.raw_issues() if r["id"] in wanted]
+        yield rows, wanted.difference(r["id"] for r in rows)
 
     def comments(self, key):
         names = self.manifest.get("comments", {}).get(key)
