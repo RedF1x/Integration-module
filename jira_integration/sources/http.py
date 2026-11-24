@@ -1,6 +1,8 @@
-"""Read-only HTTP: поиск POST разрешён, запись в Jira отсутствует."""
+"""Read-only HTTP для Jira Cloud."""
 
+import math
 import random
+import re
 import time
 from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
@@ -9,6 +11,39 @@ import requests
 
 from .base import SourceError
 from .config import api_url
+
+
+class JiraStatusError(SourceError):
+    def __init__(self, status):
+        super().__init__(f"Jira: HTTP {status}")
+        self.status = status
+
+
+class InvalidCursor(SourceError):
+    """Jira отклонила продолжение поиска."""
+
+
+class JiraUnavailable(SourceError):
+    pass
+
+
+class RetryLater(SourceError):
+    def __init__(self, seconds):
+        self.seconds = math.ceil(seconds)
+        super().__init__("Jira: достигнут лимит ожидания, запуск отложен")
+
+
+def read_retry_after(value):
+    try:
+        delay = float(value)
+    except ValueError:
+        try:
+            delay = (parsedate_to_datetime(value) - datetime.now(UTC)).total_seconds()
+        except (TypeError, ValueError, OverflowError):
+            raise SourceError("Jira: неверный Retry-After") from None
+    if not math.isfinite(delay):
+        raise SourceError("Jira: неверный Retry-After")
+    return max(0, delay)
 
 
 class JiraHTTP:
@@ -22,6 +57,7 @@ class JiraHTTP:
         retries=3,
         max_wait=120,
         timeout=(5, 30),
+        clock=time.monotonic,
     ):
         self.base_url = api_url(base_url)
         self.session = session or requests.Session()
@@ -33,6 +69,9 @@ class JiraHTTP:
         self.retries = retries
         self.max_wait = max_wait
         self.timeout = timeout
+        self.clock = clock
+        self.not_before = {}
+        self.defer_rate_limits = False
 
     def close(self):
         self.session.close()
@@ -41,10 +80,28 @@ class JiraHTTP:
         if (
             method not in {"GET", "POST"}
             or not path.startswith("/rest/")
-            or (method == "POST" and path != "/rest/api/3/search/jql")
+            or (
+                method == "POST"
+                and path
+                not in {"/rest/api/3/search/jql", "/rest/api/3/issue/bulkfetch"}
+            )
         ):
             raise SourceError("Недопустимая операция источника")
+        route = (
+            method,
+            re.sub(r"(/rest/api/3/issue/)[^/]+", r"\1{id}", path)
+            if method == "GET"
+            else path,
+        )
+        # Один HTTP-отправитель на воркер. Запас относительно порога метода Jira.
+        spacing = 1 / (140 if route == ("GET", "/rest/api/3/issue/{id}") else 80)
         for attempt in range(self.retries + 1):
+            wait = self.not_before.get(route, 0) - self.clock()
+            if wait > self.max_wait:
+                raise RetryLater(wait)
+            if wait > 0:
+                self.sleep(math.ceil(wait) if attempt else wait)
+            self.not_before[route] = self.clock() + spacing
             response = None
             try:
                 response = self.session.request(
@@ -56,7 +113,7 @@ class JiraHTTP:
                 )
             except (requests.Timeout, requests.ConnectionError):
                 if attempt == self.retries:
-                    raise SourceError("Jira: соединение недоступно") from None
+                    raise JiraUnavailable("Jira: соединение недоступно") from None
             except requests.RequestException:
                 raise SourceError("Jira: HTTP-запрос не выполнен") from None
             if response is not None:
@@ -71,27 +128,23 @@ class JiraHTTP:
                 retry_after = response.headers.get("Retry-After")
                 response.close()
                 if status != 429 and not 500 <= status < 600:
-                    raise SourceError(f"Jira: HTTP {status}")
-                if attempt == self.retries:
-                    raise SourceError(f"Jira: исчерпаны повторы HTTP {status}")
+                    raise JiraStatusError(status)
             else:
                 retry_after = None
             delay = 2**attempt + random.uniform(0, 0.25)
             if retry_after:
-                try:
-                    seconds = float(retry_after)
-                except ValueError:
-                    try:
-                        seconds = (
-                            parsedate_to_datetime(retry_after) - datetime.now(UTC)
-                        ).total_seconds()
-                    except (TypeError, ValueError, OverflowError):
-                        raise SourceError("Jira: неверный Retry-After") from None
-                delay = max(delay, seconds)
-            if not 0 <= delay <= self.max_wait:
-                # Не повторяем раньше указанного сервером времени.
-                raise SourceError("Jira: Retry-After превышает лимит ожидания")
-            self.sleep(delay)
+                delay = max(delay, read_retry_after(retry_after))
+            self.not_before[route] = self.clock() + delay
+            if (
+                response is not None
+                and response.status_code == 429
+                and self.defer_rate_limits
+            ):
+                raise RetryLater(delay)
+            if delay > self.max_wait or (attempt == self.retries and retry_after):
+                raise RetryLater(delay)
+            if attempt == self.retries:
+                raise JiraUnavailable(f"Jira: исчерпаны повторы HTTP {status}")
 
 
 def offset_pages(fetch, key="values"):
