@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from jira_integration.dto import parse_iso
 from jira_integration.sources import get_source
+from jira_integration.sync.locking import SyncBusy
 from jira_integration.sync.service import run_sync
 
 
@@ -26,6 +27,8 @@ class Command(BaseCommand):
             since = parse_iso(options["since"]) if options["since"] else None
             source = get_source()
             result = run_sync(source, mode, dry_run=options["dry_run"], since=since)
+        except SyncBusy as exc:
+            raise CommandError(str(exc)) from None
         except Exception as exc:
             # В CLI тоже исключаем вложенный HTTP traceback с входными данными.
             raise CommandError(f"Sync не запущен: {type(exc).__name__}") from None

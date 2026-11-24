@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "jira_integration.apps.JiraIntegrationConfig",
+    "jira_integration.queueing",
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,17 @@ WSGI_APPLICATION = 'standalone.wsgi.application'
 DATABASES = {
     "default": env.db("DATABASE_URL"),
 }
+
+if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
+    INSTALLED_APPS.insert(0, "procrastinate.contrib.django")
+
+JIRA_SYNC_INTERVAL_SEC = env.int("JIRA_SYNC_INTERVAL_SEC", default=60)
+JIRA_RECONCILE_INTERVAL_SEC = env.int("JIRA_RECONCILE_INTERVAL_SEC", default=3600)
+if min(JIRA_SYNC_INTERVAL_SEC, JIRA_RECONCILE_INTERVAL_SEC) < 1:
+    from django.core.exceptions import ImproperlyConfigured
+
+    raise ImproperlyConfigured("Интервалы синхронизации должны быть положительными")
+
 
 
 # Password validation

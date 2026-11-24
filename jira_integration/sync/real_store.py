@@ -10,9 +10,10 @@ from jira_integration.models import (
     JiraSyncRun,
 )
 from jira_integration.policy.rules import Field, Policy, Rule
+from jira_integration.queueing.models import SyncCursor
 
 from .django_store import DjangoStore, _upsert_sprint
-from .locking import sync_lock
+from .locking import SyncBusy, sync_lock
 
 
 class RealStore(DjangoStore):
@@ -36,8 +37,15 @@ class RealStore(DjangoStore):
 
     @transaction.atomic
     def start_run(self, mode):
-        # Вызывается под общей блокировкой: running от прежнего процесса уже
-        # не может быть живым запуском этого сервиса.
+        if (
+            SyncCursor.objects.filter(run__status="running")
+            .exclude(phase="idle")
+            .exists()
+        ):
+            raise SyncBusy(
+                "Фоновая синхронизация уже идёт. Дождитесь окончания прохода."
+            )
+        # У фонового прохода между страницами сохраняется курсор. Остались только сироты.
         JiraSyncRun.objects.filter(status="running").update(
             status="failed",
             finished_at=timezone.now(),
