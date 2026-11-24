@@ -1,3 +1,7 @@
+x-django-env: &django-env
+  SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+  DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+
 services:
   db:
     image: postgres:17
@@ -18,20 +22,50 @@ services:
   web:
     build: .
     environment:
-      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      <<: *django-env
       DEBUG: ${DEBUG:-False}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
-      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       JIRA_IDENTITY: ${JIRA_IDENTITY:-local}
       JIRA_BASE_URL: ${JIRA_BASE_URL:-}
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: python manage.py runserver 0.0.0.0:8000
+
+  migrate:
+    build: .
+    environment: *django-env
+    depends_on:
       db:
         condition: service_healthy
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+    command: python manage.py migrate --noinput
+
+  worker:
+    build: .
+    restart: unless-stopped
+    environment:
+      <<: *django-env
+      JIRA_SOURCE: ${JIRA_SOURCE:-mock}
+      JIRA_BASE_URL: ${JIRA_BASE_URL:-}
+      JIRA_API_URL: ${JIRA_API_URL:-}
+      JIRA_EMAIL: ${JIRA_EMAIL:-}
+      JIRA_API_TOKEN: ${JIRA_API_TOKEN:-}
+      JIRA_PROJECT_KEYS: ${JIRA_PROJECT_KEYS:-SCRUM}
+      JIRA_BOARD_ID: ${JIRA_BOARD_ID:-1}
+      OWNER_SOURCE: ${OWNER_SOURCE:-assignee}
+      JIRA_PRIORITY_IDS: ${JIRA_PRIORITY_IDS:-1,2,3,4,5}
+      JIRA_INCLUDE_DESCRIPTION: ${JIRA_INCLUDE_DESCRIPTION:-false}
+      JIRA_INCLUDE_COMMENTS: ${JIRA_INCLUDE_COMMENTS:-false}
+      JIRA_OVERLAP_SECONDS: ${JIRA_OVERLAP_SECONDS:-300}
+      JIRA_RAW_MANIFEST: ${JIRA_RAW_MANIFEST:-/app/fixtures/raw/sprint2.json}
+      JIRA_SYNC_INTERVAL_SEC: ${JIRA_SYNC_INTERVAL_SEC:-60}
+      JIRA_RECONCILE_INTERVAL_SEC: ${JIRA_RECONCILE_INTERVAL_SEC:-3600}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: python manage.py procrastinate worker --queues jira --concurrency 1 --delete-jobs successful
 
 volumes:
   postgres_data:
